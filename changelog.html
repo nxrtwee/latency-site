@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latency — обновления</title>
+  <meta name="description" content="История версий Latency: новые функции и улучшения в каждом релизе.">
+  <meta name="theme-color" content="#07070c">
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js"></script>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <img src="assets/img/icon.png" alt="Latency">
+        <span>Latency</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#features"><span data-lang-ru>Возможности</span><span data-lang-en>Features</span></a>
+        <a href="index.html#download"><span data-lang-ru>Загрузки</span><span data-lang-en>Download</span></a>
+        <a href="docs.html"><span data-lang-ru>Документация</span><span data-lang-en>Docs</span></a>
+        <a href="changelog.html" class="active"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></a>
+      </nav>
+      <div class="nav-right">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button data-lang="ru">RU</button>
+          <button data-lang="en">EN</button>
+        </div>
+        <a class="btn btn-ghost" href="https://github.com/nxrtwee/latency-player" target="_blank" rel="noopener" style="padding:9px 16px;">GitHub</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ CHANGELOG ============ -->
+  <main class="container section">
+    <div class="section-head center" style="margin-bottom:56px;">
+      <span class="eyebrow" data-lang-ru>Обновления</span><span class="eyebrow" data-lang-en>Changelog</span>
+      <h2><span data-lang-ru>История версий</span><span data-lang-en>Release history</span></h2>
+      <p><span data-lang-ru>Все заметные изменения. Версионирование — <a href="https://semver.org/lang/ru/" target="_blank" rel="noopener" style="color:var(--cyan)">SemVer</a>.</span><span data-lang-en>All notable changes. Versioning follows <a href="https://semver.org/" target="_blank" rel="noopener" style="color:var(--cyan)">SemVer</a>.</span></p>
+    </div>
+
+    <div class="timeline">
+
+      <!-- 0.2.0 -->
+      <section class="release reveal">
+        <div class="release-head">
+          <h3 class="gradient-text">0.2.0</h3>
+          <span class="release-ver" data-lang-ru>Текущая</span><span class="release-ver" data-lang-en style="display:none;">Latest</span>
+          <span class="release-date">2026-06-23</span>
+        </div>
+
+        <div class="release-group">
+          <h4>🔍 <span data-lang-ru>Поиск трека по строчке</span><span data-lang-en>Search a track by lyric line</span></h4>
+          <ul>
+            <li><span data-lang-ru>Во вкладке <strong>Поиск</strong> переключатель: Треки / По строчке.</span><span data-lang-en>A toggle in the <strong>Search</strong> tab: Tracks / By lyric.</span></li>
+            <li><span data-lang-ru>Вводишь фрагмент текста → Genius находит песню → она ищется на SoundCloud и показывается с обложкой и найденной строчкой.</span><span data-lang-en>Type a fragment → Genius finds the song → it's resolved on SoundCloud and shown with cover and the matched line.</span></li>
+            <li><span data-lang-ru>Клик — немедленное воспроизведение; нерезолвленные треки отбрасываются.</span><span data-lang-en>Click for instant playback; unresolved tracks are dropped.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>🎛️ <span data-lang-ru>Эквалайзер</span><span data-lang-en>Equalizer</span></h4>
+          <ul>
+            <li><span data-lang-ru>10-полосный графический EQ (32 Гц … 16 кГц), ±12 дБ, 7 пресетов (Flat, Bass, Treble, Vocal, Electronic, Rock, Loudness).</span><span data-lang-en>10-band graphic EQ (32 Hz … 16 kHz), ±12 dB, 7 presets (Flat, Bass, Treble, Vocal, Electronic, Rock, Loudness).</span></li>
+            <li><span data-lang-ru>Работает и на локальных файлах, и на SoundCloud.</span><span data-lang-en>Works for both local files and SoundCloud.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>🧠 <span data-lang-ru>Автопилот</span><span data-lang-en>Autopilot</span></h4>
+          <ul>
+            <li><span data-lang-ru>Когда очередь заканчивается, плеер сам находит похожие треки через SoundCloud и продолжает играть.</span><span data-lang-en>When the queue ends, the player finds similar tracks via SoundCloud and keeps playing.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>💬 <span data-lang-ru>Комментарии SoundCloud</span><span data-lang-en>SoundCloud comments</span></h4>
+          <ul>
+            <li><span data-lang-ru>Вкладка с обложкой, визуализатором и всплывающим пузырём текущего комментария по таймкоду; клик по комментарию = перемотка.</span><span data-lang-en>A tab with cover, visualizer and a floating bubble of the current timecoded comment; click a comment to seek.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>📥 <span data-lang-ru>Офлайн-кэш</span><span data-lang-en>Offline cache</span></h4>
+          <ul>
+            <li><span data-lang-ru>Кнопка ↓ на треках SoundCloud сохраняет MP3 локально — играет без интернета. Вкладка «Скачанное» + управление кэшем в настройках.</span><span data-lang-en>A ↓ button on SoundCloud tracks saves the MP3 locally — plays offline. A “Downloaded” tab + cache management in settings.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>🎮 Discord Rich Presence</h4>
+          <ul>
+            <li><span data-lang-ru>Название трека, автор, статус, таймер и обложка трека в профиле Discord. Настройка через Application ID.</span><span data-lang-en>Track title, artist, status, timer and cover art in your Discord profile. Configured via Application ID.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>⚡ <span data-lang-ru>Улучшения</span><span data-lang-en>Improvements</span></h4>
+          <ul>
+            <li><span data-lang-ru>Очередь: drag-and-drop, удаление треков, фильтр-строка. История поиска по строчке.</span><span data-lang-en>Queue: drag-and-drop, track removal, a filter field. Lyric-search history.</span></li>
+            <li><span data-lang-ru>SoundCloud-треки проходят через общий Web Audio граф (EQ + живой визуализатор).</span><span data-lang-en>SoundCloud tracks now run through the shared Web Audio graph (EQ + live visualizer).</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 0.1.0 -->
+      <section class="release reveal">
+        <div class="release-head">
+          <h3>0.1.0</h3>
+          <span class="release-date">2026-06-20</span>
+        </div>
+        <p style="margin-bottom:14px;"><span data-lang-ru>Первый публичный билд.</span><span data-lang-en>First public build.</span></p>
+
+        <div class="release-group">
+          <h4>🎧 <span data-lang-ru>Воспроизведение и источники</span><span data-lang-en>Playback &amp; sources</span></h4>
+          <ul>
+            <li><span data-lang-ru>Локальные файлы (теги, обложки, протокол <code>media://</code>) и SoundCloud (progressive + HLS, авто <code>client_id</code>, вход в аккаунт).</span><span data-lang-en>Local files (tags, covers, <code>media://</code> protocol) and SoundCloud (progressive + HLS, auto <code>client_id</code>, account login).</span></li>
+            <li><span data-lang-ru>Единое ядро: очередь, плеер-бар, лайки, плейлисты не зависят от источника. Очередь персистится.</span><span data-lang-en>One engine: queue, player bar, likes, playlists are source-agnostic. The queue persists.</span></li>
+          </ul>
+        </div>
+        <div class="release-group">
+          <h4>📚 <span data-lang-ru>Библиотека и навигация</span><span data-lang-en>Library &amp; navigation</span></h4>
+          <ul>
+            <li><span data-lang-ru>Home, Explore, Activity, Artist, Mix, Info, Profile. Your Likes, Recently Played, плейлисты, resizable-панели.</span><span data-lang-en>Home, Explore, Activity, Artist, Mix, Info, Profile. Your Likes, Recently Played, playlists, resizable panels.</span></li>
+          </ul>
+        </div>
+        <div class="release-group">
+          <h4>🎚️ <span data-lang-ru>Визуализатор и караоке</span><span data-lang-en>Visualizer &amp; karaoke</span></h4>
+          <ul>
+            <li><span data-lang-ru>Web Audio граф с AnalyserNode (реальный FFT для файлов). Тексты LRCLIB + Genius, ручная синхронизация, полноэкранный плеер.</span><span data-lang-en>Web Audio graph with AnalyserNode (real FFT for files). LRCLIB + Genius lyrics, manual sync, a fullscreen player.</span></li>
+          </ul>
+        </div>
+        <div class="release-group">
+          <h4>🎨 <span data-lang-ru>Оформление и локализация</span><span data-lang-en>Theming &amp; localization</span></h4>
+          <ul>
+            <li><span data-lang-ru>Темы + кастомный акцент (HSV-пикер), кастомный фон с кадрированием, компактный режим. Два языка: EN / RU.</span><span data-lang-en>Themes + custom accent (HSV picker), custom background with cropping, compact mode. Two languages: EN / RU.</span></li>
+          </ul>
+        </div>
+        <div class="release-group">
+          <h4>📦 <span data-lang-ru>Платформа</span><span data-lang-en>Platform</span></h4>
+          <ul>
+            <li><span data-lang-ru>Сборка для Windows: установщик NSIS + portable. Неоновая иконка «L».</span><span data-lang-en>Windows build: NSIS installer + portable. Neon “L” icon.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Mobile builds -->
+      <section class="release reveal">
+        <div class="release-head">
+          <h3 data-lang-ru>Мобильные сборки</h3><h3 data-lang-en style="display:none;">Mobile builds</h3>
+          <span class="release-ver">📱 iOS · Android</span>
+        </div>
+        <div class="release-group">
+          <h4 data-lang-ru>Мобильный таргет (iOS + Android, Capacitor)</h4><h4 data-lang-en style="display:none;">Mobile target (iOS + Android, Capacitor)</h4>
+          <ul>
+            <li><span data-lang-ru>Кроссплатформенный порт на Capacitor: тот же web-бандл ставится и на iOS, и на Android. Сборки доступны в Releases.</span><span data-lang-en>A cross-platform Capacitor port: the same web bundle installs on both iOS and Android. Builds are available in Releases.</span></li>
+            <li><span data-lang-ru>Android: фоновое аудио и медиа-уведомление с prev/next через Media Session API; debug-APK собирается на Linux-раннере GitHub Actions.</span><span data-lang-en>Android: background audio and a media notification with prev/next via the Media Session API; the debug APK builds on a Linux GitHub Actions runner.</span></li>
+            <li><span data-lang-ru>iOS: неподписанный <code>.ipa</code> собирается через xcodebuild, ставится сайдлоадом (AltStore / Sideloadly).</span><span data-lang-en>iOS: an unsigned <code>.ipa</code> built via xcodebuild, installed by sideloading (AltStore / Sideloadly).</span></li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+
+    <p class="center" style="margin-top:48px;">
+      <a class="btn btn-ghost" href="https://github.com/nxrtwee/latency-player/releases" target="_blank" rel="noopener"><span data-lang-ru>Все релизы на GitHub</span><span data-lang-en>All releases on GitHub</span></a>
+    </p>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <span>© <span id="year">2026</span> Latency · MIT License</span>
+      <span data-lang-ru>Сделано вайбкодингом — icountedtheblink &amp; Claude</span>
+      <span data-lang-en>Vibe-coded by icountedtheblink &amp; Claude</span>
+    </div>
+  </footer>
+
+</body>
+</html>

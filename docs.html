@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latency — документация</title>
+  <meta name="description" content="Документация Latency: установка на Windows / Android / iOS, подключение SoundCloud, Discord Rich Presence, эквалайзер, караоke, FAQ и troubleshooting.">
+  <meta name="theme-color" content="#07070c">
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js"></script>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <img src="assets/img/icon.png" alt="Latency">
+        <span>Latency</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#features"><span data-lang-ru>Возможности</span><span data-lang-en>Features</span></a>
+        <a href="index.html#download"><span data-lang-ru>Загрузки</span><span data-lang-en>Download</span></a>
+        <a href="docs.html" class="active"><span data-lang-ru>Документация</span><span data-lang-en>Docs</span></a>
+        <a href="changelog.html"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></a>
+      </nav>
+      <div class="nav-right">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button data-lang="ru">RU</button>
+          <button data-lang="en">EN</button>
+        </div>
+        <a class="btn btn-ghost" href="https://github.com/nxrtwee/latency-player" target="_blank" rel="noopener" style="padding:9px 16px;">GitHub</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ DOCS ============ -->
+  <main class="container section">
+    <div class="section-head" style="margin-bottom:40px;">
+      <span class="eyebrow" data-lang-ru>Документация</span><span class="eyebrow" data-lang-en>Documentation</span>
+      <h2><span data-lang-ru>Руководство по Latency</span><span data-lang-en>Latency guide</span></h2>
+      <p class="lead"><span data-lang-ru>Установка, подключение источников и настройка. Версия 0.2.0.</span><span data-lang-en>Installation, connecting sources and configuration. Version 0.2.0.</span></p>
+    </div>
+
+    <div class="docs-wrap">
+      <!-- Sidebar -->
+      <aside class="docs-side">
+        <h4 data-lang-ru>Начало</h4><h4 data-lang-en style="display:none;">Getting started</h4>
+        <a href="#overview"><span data-lang-ru>Обзор</span><span data-lang-en>Overview</span></a>
+        <a href="#install"><span data-lang-ru>Установка</span><span data-lang-en>Installation</span></a>
+        <h4 data-lang-ru>Источники</h4><h4 data-lang-en style="display:none;">Sources</h4>
+        <a href="#local"><span data-lang-ru>Локальные файлы</span><span data-lang-en>Local files</span></a>
+        <a href="#soundcloud">SoundCloud</a>
+        <a href="#discord">Discord</a>
+        <h4 data-lang-ru>Функции</h4><h4 data-lang-en style="display:none;">Features</h4>
+        <a href="#equalizer"><span data-lang-ru>Эквалайзер</span><span data-lang-en>Equalizer</span></a>
+        <a href="#lyrics"><span data-lang-ru>Тексты и караоке</span><span data-lang-en>Lyrics &amp; karaoke</span></a>
+        <a href="#autopilot"><span data-lang-ru>Автопилот</span><span data-lang-en>Autopilot</span></a>
+        <a href="#offline"><span data-lang-ru>Офлайн-кэш</span><span data-lang-en>Offline cache</span></a>
+        <a href="#theming"><span data-lang-ru>Оформление</span><span data-lang-en>Theming</span></a>
+        <h4 data-lang-ru>Справка</h4><h4 data-lang-en style="display:none;">Reference</h4>
+        <a href="#storage"><span data-lang-ru>Данные и приватность</span><span data-lang-en>Data &amp; privacy</span></a>
+        <a href="#build"><span data-lang-ru>Сборка из исходников</span><span data-lang-en>Build from source</span></a>
+        <a href="#faq">FAQ</a>
+        <a href="#troubleshooting"><span data-lang-ru>Проблемы</span><span data-lang-en>Troubleshooting</span></a>
+      </aside>
+
+      <!-- Body -->
+      <article class="docs-body">
+
+        <!-- OVERVIEW -->
+        <h2 id="overview"><span data-lang-ru>Обзор</span><span data-lang-en>Overview</span></h2>
+        <p><span data-lang-ru><strong>Latency</strong> — десктопный медиаплеер на Electron + React + TypeScript с архитектурой подключаемых источников (<code>PlaybackProvider</code>). Локальные файлы и SoundCloud работают через единое ядро: очередь, плеер-бар, лайки и плейлисты не зависят от источника.</span><span data-lang-en><strong>Latency</strong> is a desktop media player built on Electron + React + TypeScript with a pluggable-source architecture (<code>PlaybackProvider</code>). Local files and SoundCloud run through one engine: queue, player bar, likes and playlists are source-agnostic.</span></p>
+        <div class="note warn">
+          <span data-lang-ru><strong>Платформы.</strong> Плеер разрабатывался <strong>для десктопа (Windows)</strong> — это эталонный опыт. Порты на Android и iOS рабочие, но местами сырые.</span>
+          <span data-lang-en><strong>Platforms.</strong> The player was built <strong>for desktop (Windows)</strong> — that's the reference experience. The Android and iOS ports work but are rough in places.</span>
+        </div>
+
+        <!-- INSTALL -->
+        <h2 id="install"><span data-lang-ru>Установка</span><span data-lang-en>Installation</span></h2>
+        <p><span data-lang-ru>Все сборки лежат на вкладке <a href="https://github.com/nxrtwee/latency-player/releases/latest" target="_blank" rel="noopener" style="color:var(--cyan)">Releases</a>. Выберите файл под свою платформу.</span><span data-lang-en>All builds are on the <a href="https://github.com/nxrtwee/latency-player/releases/latest" target="_blank" rel="noopener" style="color:var(--cyan)">Releases</a> page. Pick the file for your platform.</span></p>
+
+        <h3>Windows</h3>
+        <ol class="steps">
+          <li><span data-lang-ru>Скачайте <code>Latency-0.2.0-x64.exe</code> (установщик NSIS) или <code>Latency-0.2.0-portable.exe</code> (без установки).</span><span data-lang-en>Download <code>Latency-0.2.0-x64.exe</code> (NSIS installer) or <code>Latency-0.2.0-portable.exe</code> (no install).</span></li>
+          <li><span data-lang-ru>Запустите установщик и выберите папку (можно изменить путь установки), либо просто запустите портативный <code>.exe</code>.</span><span data-lang-en>Run the installer and choose a folder (the install path is changeable), or just run the portable <code>.exe</code>.</span></li>
+          <li><span data-lang-ru>Если SmartScreen ругается на неизвестного издателя — «Подробнее» → «Выполнить в любом случае» (сборка без платной подписи кода).</span><span data-lang-en>If SmartScreen warns about an unknown publisher — “More info” → “Run anyway” (the build isn't paid-code-signed).</span></li>
+        </ol>
+
+        <h3>Android</h3>
+        <ol class="steps">
+          <li><span data-lang-ru>Скачайте <code>Latency.apk</code> на телефон.</span><span data-lang-en>Download <code>Latency.apk</code> to your phone.</span></li>
+          <li><span data-lang-ru>Откройте файл — система попросит разрешить «Установка из неизвестных источников» для браузера/проводника. Включите.</span><span data-lang-en>Open the file — the system will ask to allow “Install from unknown sources” for your browser/file manager. Enable it.</span></li>
+          <li><span data-lang-ru>Подтвердите установку. Это debug-APK — обновления раз в 7 дней не требуются.</span><span data-lang-en>Confirm the install. It's a debug APK — no 7-day re-signing needed.</span></li>
+        </ol>
+
+        <h3>iOS</h3>
+        <p><span data-lang-ru>iOS-сборка — <strong>неподписанный</strong> <code>Latency-unsigned.ipa</code>. Подпишите своим Apple ID через сайдлоадер:</span><span data-lang-en>The iOS build is an <strong>unsigned</strong> <code>Latency-unsigned.ipa</code>. Sign it with your Apple ID via a sideloader:</span></p>
+        <ol class="steps">
+          <li><span data-lang-ru>Установите <a href="https://altstore.io/" target="_blank" rel="noopener" style="color:var(--cyan)">AltStore</a> или <a href="https://sideloadly.io/" target="_blank" rel="noopener" style="color:var(--cyan)">Sideloadly</a> на компьютер.</span><span data-lang-en>Install <a href="https://altstore.io/" target="_blank" rel="noopener" style="color:var(--cyan)">AltStore</a> or <a href="https://sideloadly.io/" target="_blank" rel="noopener" style="color:var(--cyan)">Sideloadly</a> on your computer.</span></li>
+          <li><span data-lang-ru>Подключите iPhone, перетащите <code>.ipa</code> и подпишите своим Apple ID.</span><span data-lang-en>Connect your iPhone, drop the <code>.ipa</code> in and sign with your Apple ID.</span></li>
+          <li><span data-lang-ru>На бесплатном аккаунте подпись действует 7 дней — потом перевыпуск.</span><span data-lang-en>On a free account the signature lasts 7 days — re-sign after that.</span></li>
+        </ol>
+
+        <!-- LOCAL -->
+        <h2 id="local"><span data-lang-ru>Локальные файлы</span><span data-lang-en>Local files</span></h2>
+        <p><span data-lang-ru>Добавьте папки с музыкой — Latency просканирует их, прочитает теги и обложки (<code>music-metadata</code>) и закэширует обложки в <code>userData</code>. Файлы отдаются через собственный протокол <code>media://</code>. Без ограничений по форматам и количеству.</span><span data-lang-en>Add your music folders — Latency scans them, reads tags and cover art (<code>music-metadata</code>) and caches covers in <code>userData</code>. Files are served through a custom <code>media://</code> protocol. No format or count limits.</span></p>
+
+        <!-- SOUNDCLOUD -->
+        <h2 id="soundcloud">SoundCloud</h2>
+        <p><span data-lang-ru>Поиск треков и артистов работает <strong>без входа</strong>: <code>client_id</code> подбирается автоматически (скрейпится на лету, авто-рефреш при 401). Стрим — progressive (MP3) и HLS (через <code>hls.js</code>).</span><span data-lang-en>Track &amp; artist search works <strong>without logging in</strong>: <code>client_id</code> is fetched automatically (scraped on the fly, auto-refreshed on 401). Streaming is progressive (MP3) and HLS (via <code>hls.js</code>).</span></p>
+        <h3><span data-lang-ru>Вход в аккаунт (опционально)</span><span data-lang-en>Logging in (optional)</span></h3>
+        <p><span data-lang-ru>Вход открывает персональные миксы и лайки. Подключение — в <strong>Profile</strong> или <strong>Settings → SoundCloud</strong>: после логина OAuth-токен перехватывается из вашей же сессии и хранится <strong>локально</strong> в <code>%APPDATA%/latency-player/soundcloud.json</code>. В репозиторий он не попадает.</span><span data-lang-en>Logging in unlocks personal mixes and likes. Connect in <strong>Profile</strong> or <strong>Settings → SoundCloud</strong>: after login the OAuth token is captured from your own session and stored <strong>locally</strong> in <code>%APPDATA%/latency-player/soundcloud.json</code>. It never enters the repo.</span></p>
+        <div class="note"><span data-lang-ru>Токен только ваш и только на вашем компьютере. Отключить аккаунт можно в профиле в любой момент.</span><span data-lang-en>The token is yours and stays on your machine. You can disconnect the account from your profile any time.</span></div>
+        <div class="note warn">
+          <span data-lang-ru><strong>🇷🇺 Россия.</strong> SoundCloud в России заблокирован (ограничение самой площадки), поэтому онлайн-поиск и стрим SoundCloud работают <strong>только через VPN</strong>. При этом <strong>локальные файлы работают без VPN</strong>, а поиск текстов (LRCLIB / Genius) скорее всего тоже доступен — эти сервисы не заблокированы.</span>
+          <span data-lang-en><strong>🇷🇺 Russia.</strong> SoundCloud is blocked in Russia (a platform-side restriction), so SoundCloud online search and streaming work <strong>only over a VPN</strong>. <strong>Local files work without a VPN</strong>, and lyrics search (LRCLIB / Genius) most likely works too — those services aren't blocked.</span>
+        </div>
+
+        <!-- DISCORD -->
+        <h2 id="discord">Discord Rich Presence</h2>
+        <p><span data-lang-ru>Показывает в профиле Discord название трека, <code>by Автор</code>, статус играет/пауза, таймер и <strong>обложку трека</strong> вместо иконки приложения.</span><span data-lang-en>Shows the track title, <code>by Artist</code>, playing/paused status, a timer and the <strong>track cover</strong> (instead of an app icon) in your Discord profile.</span></p>
+        <ol class="steps">
+          <li><span data-lang-ru>Создайте приложение на <a href="https://discord.com/developers/applications" target="_blank" rel="noopener" style="color:var(--cyan)">discord.com/developers</a> и скопируйте <strong>Application ID</strong>.</span><span data-lang-en>Create an app at <a href="https://discord.com/developers/applications" target="_blank" rel="noopener" style="color:var(--cyan)">discord.com/developers</a> and copy its <strong>Application ID</strong>.</span></li>
+          <li><span data-lang-ru>В Latency: <strong>Settings → Discord</strong> → включите тумблер и вставьте Application ID.</span><span data-lang-en>In Latency: <strong>Settings → Discord</strong> → toggle it on and paste the Application ID.</span></li>
+          <li><span data-lang-ru>Запустите Discord-десктоп. Если он не запущен — плеер просто не показывает статус, без падений.</span><span data-lang-en>Run the Discord desktop app. If it isn't running, the player just skips presence — no crashes.</span></li>
+        </ol>
+
+        <!-- EQUALIZER -->
+        <h2 id="equalizer"><span data-lang-ru>Эквалайзер</span><span data-lang-en>Equalizer</span></h2>
+        <p><span data-lang-ru><strong>10 полос</strong> (32 Гц … 16 кГц, BiquadFilter peaking), вертикальные ползунки ±12 дБ, тумблер вкл/выкл и <strong>7 пресетов</strong>: Flat, Bass Boost, Treble Boost, Vocal, Electronic, Rock, Loudness. Открывается кнопкой <strong>EQ</strong> в правой панели. Работает и на локальных файлах, и на SoundCloud.</span><span data-lang-en><strong>10 bands</strong> (32 Hz … 16 kHz, peaking BiquadFilter), vertical ±12 dB sliders, an on/off toggle and <strong>7 presets</strong>: Flat, Bass Boost, Treble Boost, Vocal, Electronic, Rock, Loudness. Opened via the <strong>EQ</strong> button in the right panel. Works for both local files and SoundCloud.</span></p>
+
+        <!-- LYRICS -->
+        <h2 id="lyrics"><span data-lang-ru>Тексты и караоке</span><span data-lang-en>Lyrics &amp; karaoke</span></h2>
+        <ul>
+          <li><span data-lang-ru><strong>LRCLIB</strong> — синхронизированный LRC: построчная подсветка по позиции, автоскролл, клик по строке = перемотка.</span><span data-lang-en><strong>LRCLIB</strong> — synced LRC: per-line highlight by position, auto-scroll, click a line to seek.</span></li>
+          <li><span data-lang-ru><strong>Genius</strong> — фолбэк (plain-текст) с оценочной авто-разбивкой по времени.</span><span data-lang-en><strong>Genius</strong> — fallback (plain text) with estimated time-splitting.</span></li>
+          <li><span data-lang-ru><strong>Ручная синхронизация</strong> (SyncEditor) — свои тайминги, защищённые от перезаписи. Кэш — в <code>userData/lyrics</code>.</span><span data-lang-en><strong>Manual sync</strong> (SyncEditor) — your own timings, protected from overwrite. Cached in <code>userData/lyrics</code>.</span></li>
+        </ul>
+
+        <!-- AUTOPILOT -->
+        <h2 id="autopilot"><span data-lang-ru>Автопилот</span><span data-lang-en>Autopilot</span></h2>
+        <p><span data-lang-ru>Тумблер на нижнем прогресс-баре (рядом с караоке). Когда включён и очередь заканчивается, плеер автоматически находит похожие треки через SoundCloud (<code>scRelated</code>) и продолжает играть без остановки.</span><span data-lang-en>A toggle on the bottom progress bar (next to karaoke). When on and the queue runs out, the player automatically finds similar tracks via SoundCloud (<code>scRelated</code>) and keeps playing non-stop.</span></p>
+
+        <!-- OFFLINE -->
+        <h2 id="offline"><span data-lang-ru>Офлайн-кэш</span><span data-lang-en>Offline cache</span></h2>
+        <p><span data-lang-ru>Кнопка скачивания (↓) на каждом SoundCloud-треке сохраняет MP3 в <code>userData/offline</code> — потом он играет без интернета. Вкладка <strong>Скачанное</strong> в сайдбаре → «Моя музыка». В <strong>Settings → Storage</strong> видно количество и размер кэша с кнопкой очистки.</span><span data-lang-en>The download button (↓) on any SoundCloud track saves the MP3 to <code>userData/offline</code> — it then plays offline. A <strong>Downloaded</strong> tab in the sidebar → “My music”. <strong>Settings → Storage</strong> shows cache count and size with a clear button.</span></p>
+
+        <!-- THEMING -->
+        <h2 id="theming"><span data-lang-ru>Оформление</span><span data-lang-en>Theming</span></h2>
+        <ul>
+          <li><span data-lang-ru><strong>Темы:</strong> Green, Purple, Blue, Pink + кастомный акцент (собственный HSV-пикер с hex и пресетами).</span><span data-lang-en><strong>Themes:</strong> Green, Purple, Blue, Pink + a custom accent (built-in HSV picker with hex and presets).</span></li>
+          <li><span data-lang-ru><strong>Кастомный фон:</strong> своя картинка с недеструктивным кадрированием (пан/зум), область применения — полноэкранный / интерфейс / везде.</span><span data-lang-en><strong>Custom background:</strong> your own image with non-destructive cropping (pan/zoom), applied to fullscreen / UI / everywhere.</span></li>
+          <li><span data-lang-ru><strong>Компактный режим</strong>, размер текста караоке (S/M/L), два языка интерфейса (EN/RU).</span><span data-lang-en><strong>Compact mode</strong>, karaoke text size (S/M/L), two UI languages (EN/RU).</span></li>
+        </ul>
+
+        <!-- STORAGE -->
+        <h2 id="storage"><span data-lang-ru>Данные и приватность</span><span data-lang-en>Data &amp; privacy</span></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th data-lang-ru>Где</th><th data-lang-en style="display:none;">Where</th>
+              <th data-lang-ru>Что хранится</th><th data-lang-en style="display:none;">What</th>
+            </tr></thead>
+            <tbody>
+              <tr><td><code>localStorage</code></td><td><span data-lang-ru>очередь, громкость, история, тема, профиль, фон</span><span data-lang-en>queue, volume, history, theme, profile, background</span></td></tr>
+              <tr><td><code>userData</code></td><td><span data-lang-ru>лайки, плейлисты, кэш обложек/текстов, офлайн-треки, токен SoundCloud</span><span data-lang-en>likes, playlists, cover/lyrics cache, offline tracks, SoundCloud token</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><span data-lang-ru>В коде нет захардкоженных секретов. <code>client_id</code> берётся на лету, OAuth-токен SoundCloud перехватывается из вашего логина и хранится <strong>только локально</strong>. Обход DRM и риппинг защищённого аудио (Spotify/Яндекс) не делается.</span><span data-lang-en>There are no hardcoded secrets in the code. <code>client_id</code> is fetched on the fly, the SoundCloud OAuth token is captured from your own login and kept <strong>locally only</strong>. No DRM circumvention or protected-audio ripping (Spotify/Yandex) is done.</span></p>
+
+        <!-- BUILD -->
+        <h2 id="build"><span data-lang-ru>Сборка из исходников</span><span data-lang-en>Build from source</span></h2>
+        <pre><code>npm install
+npm run dev        # <span data-lang-ru>десктоп, дев-режим с hot-reload</span><span data-lang-en>desktop dev with hot-reload</span>
+npm run dev:mobile # <span data-lang-ru>мобильный таргет в браузере</span><span data-lang-en>mobile target in the browser</span>
+
+npm run build      # main + preload + renderer → out/
+npm run typecheck  # <span data-lang-ru>проверка типов</span><span data-lang-en>type checking</span>
+npm run dist:win   # <span data-lang-ru>установщик NSIS + портативный exe → release/</span><span data-lang-en>NSIS installer + portable exe → release/</span></code></pre>
+        <div class="note"><span data-lang-ru>Для <code>dist:win</code> локально на Windows нужен включённый <strong>Developer Mode</strong> (иначе electron-builder падает на распаковке winCodeSign). Все три артефакта (Win/Android/iOS) собираются в GitHub Actions при пуше тега <code>v*</code>.</span><span data-lang-en>For <code>dist:win</code> locally on Windows you need <strong>Developer Mode</strong> enabled (otherwise electron-builder fails unpacking winCodeSign). All three artifacts (Win/Android/iOS) are built in GitHub Actions on pushing a <code>v*</code> tag.</span></div>
+
+        <!-- FAQ -->
+        <h2 id="faq">FAQ</h2>
+        <div class="faq">
+          <details>
+            <summary><span data-lang-ru>Это бесплатно?</span><span data-lang-en>Is it free?</span></summary>
+            <p><span data-lang-ru>Да. Полностью бесплатно, открытый исходный код под лицензией MIT.</span><span data-lang-en>Yes. Completely free and open source under the MIT license.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang-ru>Нужен ли аккаунт SoundCloud?</span><span data-lang-en>Do I need a SoundCloud account?</span></summary>
+            <p><span data-lang-ru>Нет, поиск и воспроизведение работают без входа. Аккаунт нужен только для персональных миксов и лайков.</span><span data-lang-en>No, search and playback work without logging in. An account is only needed for personal mixes and likes.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang-ru>Поддерживается ли Spotify?</span><span data-lang-en>Is Spotify supported?</span></summary>
+            <p><span data-lang-ru>Нет. Обход DRM и риппинг защищённого аудио в проекте не делается. Источники — локальные файлы и SoundCloud.</span><span data-lang-en>No. DRM circumvention and protected-audio ripping are out of scope. The sources are local files and SoundCloud.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang-ru>Работает ли в России?</span><span data-lang-en>Does it work in Russia?</span></summary>
+            <p><span data-lang-ru>SoundCloud в России заблокирован (ограничение площадки), поэтому онлайн-поиск и стрим SoundCloud работают только через VPN. Локальные файлы работают без VPN, поиск текстов (LRCLIB / Genius) — скорее всего тоже.</span><span data-lang-en>SoundCloud is blocked in Russia (a platform-side restriction), so its online search and streaming need a VPN. Local files work without a VPN, and lyrics search (LRCLIB / Genius) most likely works too.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang-ru>Можно ли добавить свой источник?</span><span data-lang-en>Can I add my own source?</span></summary>
+            <p><span data-lang-ru>Да. Реализуйте интерфейс <code>PlaybackProvider</code> и зарегистрируйте его в <code>registry.ts</code> — ядро (стор, UI, очередь) не меняется.</span><span data-lang-en>Yes. Implement the <code>PlaybackProvider</code> interface and register it in <code>registry.ts</code> — the core (store, UI, queue) stays unchanged.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang-ru>Почему мобильная версия сырая?</span><span data-lang-en>Why is the mobile version rough?</span></summary>
+            <p><span data-lang-ru>Плеер делался для десктопа; мобильные порты на Capacitor добавлены ради кроссплатформенности. Эталонный опыт — на Windows.</span><span data-lang-en>The player was built for desktop; the Capacitor mobile ports were added for cross-platform coverage. The reference experience is on Windows.</span></p>
+          </details>
+        </div>
+
+        <!-- TROUBLESHOOTING -->
+        <h2 id="troubleshooting"><span data-lang-ru>Решение проблем</span><span data-lang-en>Troubleshooting</span></h2>
+        <div class="faq">
+          <details>
+            <summary>SmartScreen / Windows Defender</summary>
+            <p><span data-lang-ru>Сборка не подписана платным сертификатом. «Подробнее» → «Выполнить в любом случае». Исходники открыты — можно собрать самому.</span><span data-lang-en>The build isn't signed with a paid certificate. “More info” → “Run anyway”. The source is open — you can build it yourself.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang-ru>SoundCloud не ищет / ошибка 401</span><span data-lang-en>SoundCloud search fails / 401 error</span></summary>
+            <p><span data-lang-ru><code>client_id</code> авто-обновляется при 401. Если поиск всё ещё не работает — проверьте интернет и перезапустите плеер; client_id подберётся заново.</span><span data-lang-en>The <code>client_id</code> auto-refreshes on 401. If search still fails — check your connection and restart the player; the client_id will be re-fetched.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang-ru>Нет текста песни</span><span data-lang-en>No lyrics</span></summary>
+            <p><span data-lang-ru>Не для всех треков есть синхронный LRC. Включите фолбэк на Genius в настройках или задайте тайминги вручную через SyncEditor.</span><span data-lang-en>Not every track has a synced LRC. Enable the Genius fallback in settings, or set timings manually via the SyncEditor.</span></p>
+          </details>
+          <details>
+            <summary><code>Error: Electron uninstall</code> (dev)</summary>
+            <p><span data-lang-ru>Бинарник Electron не распаковался при установке. Выполните: <code>node node_modules/electron/install.js</code>.</span><span data-lang-en>The Electron binary didn't unpack on install. Run: <code>node node_modules/electron/install.js</code>.</span></p>
+          </details>
+        </div>
+
+        <div class="note" style="margin-top:40px;">
+          <span data-lang-ru>Не нашли ответа? Откройте issue на <a href="https://github.com/nxrtwee/latency-player/issues" target="_blank" rel="noopener" style="color:var(--cyan)">GitHub</a>.</span>
+          <span data-lang-en>Didn't find your answer? Open an issue on <a href="https://github.com/nxrtwee/latency-player/issues" target="_blank" rel="noopener" style="color:var(--cyan)">GitHub</a>.</span>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <span>© <span id="year">2026</span> Latency · MIT License</span>
+      <span data-lang-ru>Сделано вайбкодингом — icountedtheblink &amp; Claude</span>
+      <span data-lang-en>Vibe-coded by icountedtheblink &amp; Claude</span>
+    </div>
+  </footer>
+
+</body>
+</html>

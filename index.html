@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latency — кроссплатформенный медиаплеер</title>
+  <meta name="description" content="Latency — десктопный медиаплеер уровня Spotify: локальные файлы и SoundCloud, эквалайзер, караоке-тексты, автопилот и офлайн-кэш. Windows, Android, iOS.">
+  <meta name="theme-color" content="#07070c">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Latency — кроссплатформенный медиаплеер">
+  <meta property="og:description" content="Локальные файлы и SoundCloud, эквалайзер, караоке, автопилот. Windows · Android · iOS.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/icon.png">
+
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js"></script>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <img src="assets/img/icon.png" alt="Latency">
+        <span>Latency</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#features"><span data-lang-ru>Возможности</span><span data-lang-en>Features</span></a>
+        <a href="#screens"><span data-lang-ru>Скриншоты</span><span data-lang-en>Screenshots</span></a>
+        <a href="#download"><span data-lang-ru>Загрузки</span><span data-lang-en>Download</span></a>
+        <a href="docs.html"><span data-lang-ru>Документация</span><span data-lang-en>Docs</span></a>
+        <a href="changelog.html"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></a>
+      </nav>
+      <div class="nav-right">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button data-lang="ru">RU</button>
+          <button data-lang="en">EN</button>
+        </div>
+        <a class="btn btn-ghost" href="https://github.com/nxrtwee/latency-player" target="_blank" rel="noopener" style="padding:9px 16px;">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Electron · React · TypeScript</span>
+        <h1>
+          <span data-lang-ru>Latency — музыкальный плеер <span class="gradient-text">нового поколения</span></span>
+          <span data-lang-en>Latency — the <span class="gradient-text">next-generation</span> music player</span>
+        </h1>
+        <p class="hero-lead">
+          <span data-lang-ru>Десктопный плеер уровня Spotify, написанный с нуля. Локальные файлы и SoundCloud через единое ядро — эквалайзер, караоке-тексты, автопилот, офлайн-кэш и собственный неоновый интерфейс.</span>
+          <span data-lang-en>A Spotify-grade desktop player, built from scratch. Local files and SoundCloud through one engine — equalizer, karaoke lyrics, autopilot, offline cache and a custom neon UI.</span>
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="#download" data-hero-dl>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+            <span data-hero-label><span data-lang-ru>Скачать</span><span data-lang-en>Download</span></span>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="docs.html">
+            <span data-lang-ru>Документация</span><span data-lang-en>Documentation</span>
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span><b>Windows</b> · <b>Android</b> · <b>iOS</b></span>
+          <span data-lang-ru>🆓 Бесплатно · MIT</span><span data-lang-en>🆓 Free · MIT</span>
+          <span data-lang-ru>🌐 EN / RU</span><span data-lang-en>🌐 EN / RU</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="glow-orb"></div>
+        <div class="hero-logo">
+          <img src="assets/img/icon.png" alt="Логотип Latency" width="1030" height="1030" fetchpriority="high">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow" data-lang-ru>Возможности</span><span class="eyebrow" data-lang-en>Features</span>
+        <h2><span data-lang-ru>Всё, что нужно для прослушивания</span><span data-lang-en>Everything you need to listen</span></h2>
+        <p>
+          <span data-lang-ru>Архитектура подключаемых источников: локальные файлы и SoundCloud работают одинаково, новый источник — это один интерфейс.</span>
+          <span data-lang-en>A pluggable-source architecture: local files and SoundCloud behave identically, and a new source is just one interface.</span>
+        </p>
+      </div>
+
+      <div class="feature-grid reveal">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></div>
+          <h3><span data-lang-ru>Локальные файлы</span><span data-lang-en>Local files</span></h3>
+          <p><span data-lang-ru>Скан папок, чтение тегов и обложек, отдача через собственный протокол <code>media://</code>.</span><span data-lang-en>Folder scanning, tag &amp; cover reading, served via a custom <code>media://</code> protocol.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.7-1.5A4 4 0 0 0 6 19z"/><path d="M6 19V11M9 19v-9M12 19v-6"/></svg></div>
+          <h3>SoundCloud</h3>
+          <p><span data-lang-ru>Поиск треков и артистов, стрим (progressive + HLS), вход в аккаунт, персональные миксы и лайки.</span><span data-lang-en>Track &amp; artist search, streaming (progressive + HLS), account login, personal mixes and likes.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V14M5 10V3M12 21V12M12 8V3M19 21V16M19 12V3"/><path d="M2 14h6M9 8h6M16 16h6"/></svg></div>
+          <h3><span data-lang-ru>10-полосный эквалайзер</span><span data-lang-en>10-band equalizer</span></h3>
+          <p><span data-lang-ru>Web Audio BiquadFilter, 7 пресетов (Flat, Bass, Vocal, Electronic…) — для файлов и SoundCloud.</span><span data-lang-en>Web Audio BiquadFilter, 7 presets (Flat, Bass, Vocal, Electronic…) — for files and SoundCloud.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"/></svg></div>
+          <h3><span data-lang-ru>Караоке-тексты</span><span data-lang-en>Karaoke lyrics</span></h3>
+          <p><span data-lang-ru>Синхронные тексты LRCLIB + фолбэк Genius, ручная синхронизация, караоке в полноэкранном плеере.</span><span data-lang-en>Synced lyrics via LRCLIB + Genius fallback, manual sync, karaoke in the fullscreen player.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16 8 13.5 13.5 8 16 10.5 10.5 16 8"/></svg></div>
+          <h3><span data-lang-ru>Автопилот</span><span data-lang-en>Autopilot</span></h3>
+          <p><span data-lang-ru>Когда очередь кончается, плеер сам находит похожие треки и продолжает играть без остановки.</span><span data-lang-en>When the queue runs out, the player finds similar tracks and keeps playing non-stop.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg></div>
+          <h3><span data-lang-ru>Офлайн-кэш</span><span data-lang-en>Offline cache</span></h3>
+          <p><span data-lang-ru>Скачанные треки SoundCloud играют без интернета — вкладка «Скачанное» в сайдбаре.</span><span data-lang-en>Downloaded SoundCloud tracks play without internet — a “Downloaded” tab in the sidebar.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h3><span data-lang-ru>Поиск по строчке</span><span data-lang-en>Search by lyric</span></h3>
+          <p><span data-lang-ru>Помните фрагмент песни? Введите строчку → Genius находит трек → он ищется на SoundCloud.</span><span data-lang-en>Remember a line? Type it → Genius finds the song → it’s resolved on SoundCloud.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4a8.4 8.4 0 1 1 16.4-5.5z"/></svg></div>
+          <h3><span data-lang-ru>Комментарии SoundCloud</span><span data-lang-en>SoundCloud comments</span></h3>
+          <p><span data-lang-ru>Обложка, визуализатор и всплывающие комментарии по таймкодам — как на оригинальном сайте.</span><span data-lang-en>Cover art, visualizer and timecoded floating comments — just like the original site.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M7 12h3M8.5 10.5v3"/><circle cx="15.5" cy="11" r="0.6" fill="currentColor"/><circle cx="17.5" cy="13.5" r="0.6" fill="currentColor"/></svg></div>
+          <h3>Discord Rich Presence</h3>
+          <p><span data-lang-ru>Название трека и обложка прямо в профиле Discord, пока играет музыка.</span><span data-lang-en>Track title and cover art right in your Discord profile while music plays.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0 0 18 2 2 0 0 0 2-2 2 2 0 0 1 2-2h1a4 4 0 0 0 4-4 9 9 0 0 0-9-8z"/><circle cx="7.5" cy="11.5" r="1" fill="currentColor"/><circle cx="12" cy="8.5" r="1" fill="currentColor"/><circle cx="16.5" cy="11.5" r="1" fill="currentColor"/></svg></div>
+          <h3><span data-lang-ru>Гибкое оформление</span><span data-lang-en>Custom theming</span></h3>
+          <p><span data-lang-ru>Визуализатор, кастомные обои и акценты, тёмная тема, своя рамка окна. Два языка интерфейса.</span><span data-lang-en>Visualizer, custom wallpapers &amp; accents, dark theme, custom window frame. Two UI languages.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENSHOTS ============ -->
+  <section class="section" id="screens" style="padding-top:0;">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow" data-lang-ru>Интерфейс</span><span class="eyebrow" data-lang-en>Interface</span>
+        <h2><span data-lang-ru>Собственный неоновый интерфейс</span><span data-lang-en>A custom neon interface</span></h2>
+        <p><span data-lang-ru>Тёмная тема, неоновый акцент, три колонки, реактивный визуализатор. Кликните, чтобы увеличить.</span><span data-lang-en>Dark theme, neon accent, three columns, a reactive visualizer. Click to enlarge.</span></p>
+      </div>
+
+      <div class="gallery reveal">
+
+        <!-- Home — full -->
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/home.png">
+            <img src="assets/img/shots/home.png" width="1919" height="1032" alt="Главный экран Latency" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>Главная: персональные миксы, библиотека и мини-плеер с визуализатором</span><span data-lang-en>Home: personal mixes, library and a mini-player with visualizer</span></figcaption>
+        </figure>
+
+        <!-- Cropped views -->
+        <div class="gmasonry">
+          <figure class="gshot">
+            <div class="win" data-full="assets/img/shots/search.png">
+              <img src="assets/img/shots/search.png" width="1283" height="433" alt="Поиск" loading="lazy">
+            </div>
+            <figcaption class="cap"><span data-lang-ru>Поиск трека по строчке из песни</span><span data-lang-en>Search a track by a lyric line</span></figcaption>
+          </figure>
+
+          <figure class="gshot">
+            <div class="win" data-full="assets/img/shots/liked.png">
+              <img src="assets/img/shots/liked.png" width="1268" height="596" alt="Любимое" loading="lazy">
+            </div>
+            <figcaption class="cap"><span data-lang-ru>«Любимое» — лайки треков любого источника</span><span data-lang-en>“Liked” — track likes from any source</span></figcaption>
+          </figure>
+
+          <figure class="gshot">
+            <div class="win" data-full="assets/img/shots/track.png">
+              <img src="assets/img/shots/track.png" width="1284" height="854" alt="Страница трека и комментарии" loading="lazy">
+            </div>
+            <figcaption class="cap"><span data-lang-ru>Страница трека: волна, визуализатор и комментарии по таймкодам</span><span data-lang-en>Track page: waveform, visualizer and timecoded comments</span></figcaption>
+          </figure>
+
+          <figure class="gshot">
+            <div class="win" data-full="assets/img/shots/profile.png">
+              <img src="assets/img/shots/profile.png" width="1279" height="708" alt="Профиль" loading="lazy">
+            </div>
+            <figcaption class="cap"><span data-lang-ru>Профиль: статистика и недавние артисты</span><span data-lang-en>Profile: stats and recent artists</span></figcaption>
+          </figure>
+
+          <figure class="gshot">
+            <div class="win" data-full="assets/img/shots/settings.png">
+              <img src="assets/img/shots/settings.png" width="771" height="1028" alt="Настройки" loading="lazy">
+            </div>
+            <figcaption class="cap"><span data-lang-ru>Настройки: темы, акцент, фон, эквалайзер</span><span data-lang-en>Settings: themes, accent, background, EQ</span></figcaption>
+          </figure>
+        </div>
+
+        <!-- Karaoke — full -->
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/karaoke.png">
+            <img src="assets/img/shots/karaoke.png" width="1919" height="1030" alt="Полноэкранное караоке" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>Полноэкранный плеер с караоке-текстом</span><span data-lang-en>Fullscreen player with karaoke lyrics</span></figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MOBILE ============ -->
+  <section class="section" id="mobile" style="padding-top:0;">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow" data-lang-ru>Мобильные</span><span class="eyebrow" data-lang-en>Mobile</span>
+        <h2><span data-lang-ru>Latency в кармане</span><span data-lang-en>Latency in your pocket</span></h2>
+        <p><span data-lang-ru>Тот же плеер на iOS и Android — порт на Capacitor с фоновым воспроизведением и медиа-уведомлением. Эталонный опыт всё же на десктопе.</span><span data-lang-en>The same player on iOS and Android — a Capacitor port with background playback and a media notification. The reference experience is still on desktop.</span></p>
+      </div>
+
+      <div class="phones reveal">
+        <div class="phone">
+          <img src="assets/img/mobile/home.jpg" alt="Мобильная главная" loading="lazy">
+          <div class="phone-cap"><span data-lang-ru>Главная</span><span data-lang-en>Home</span></div>
+        </div>
+        <div class="phone">
+          <img src="assets/img/mobile/library.jpg" alt="Мобильная библиотека" loading="lazy">
+          <div class="phone-cap"><span data-lang-ru>Библиотека</span><span data-lang-en>Library</span></div>
+        </div>
+        <div class="phone">
+          <img src="assets/img/mobile/profile.jpg" alt="Мобильный профиль" loading="lazy">
+          <div class="phone-cap"><span data-lang-ru>Профиль</span><span data-lang-en>Profile</span></div>
+        </div>
+        <div class="phone">
+          <img src="assets/img/mobile/settings.jpg" alt="Мобильные настройки" loading="lazy">
+          <div class="phone-cap"><span data-lang-ru>Оформление</span><span data-lang-en>Appearance</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOWNLOAD ============ -->
+  <section class="section" id="download" style="padding-top:0;">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow" data-lang-ru>Загрузки</span><span class="eyebrow" data-lang-en>Download</span>
+        <h2><span data-lang-ru>Скачать Latency</span><span data-lang-en>Get Latency</span></h2>
+        <p><span data-lang-ru>Готовые сборки публикуются на GitHub Releases. Текущая версия — <b>0.2.0</b>.</span><span data-lang-en>Prebuilt binaries are published on GitHub Releases. Current version — <b>0.2.0</b>.</span></p>
+      </div>
+
+      <div class="dl-grid reveal">
+        <!-- Windows -->
+        <div class="dl-card" data-plat="win">
+          <span class="dl-badge" data-lang-ru>Рекомендуется</span>
+          <div class="plat-icon"><svg viewBox="0 0 24 24"><path d="M3 5.4 10.3 4.4V11.4H3zM10.3 12.3V19.6L3 18.6V12.3zM11.3 4.3 21 3v8.4H11.3zM21 12.3V21l-9.7-1.3V12.3z"/></svg></div>
+          <h3>Windows</h3>
+          <div class="plat-sub" data-lang-ru>Эталонный опыт · x64</div>
+          <div class="plat-sub" data-lang-en style="display:none;">Reference experience · x64</div>
+          <ul>
+            <li><code>Latency-0.2.0-x64.exe</code> — <span data-lang-ru>установщик (NSIS)</span><span data-lang-en>installer (NSIS)</span></li>
+            <li><code>Latency-0.2.0-portable.exe</code> — <span data-lang-ru>портативная версия</span><span data-lang-en>portable build</span></li>
+          </ul>
+          <a class="btn btn-primary btn-block" href="https://github.com/nxrtwee/latency-player/releases/latest" target="_blank" rel="noopener">
+            <span data-lang-ru>Скачать для Windows</span><span data-lang-en>Download for Windows</span>
+          </a>
+        </div>
+
+        <!-- Android -->
+        <div class="dl-card" data-plat="android">
+          <div class="plat-icon"><svg viewBox="0 0 24 24"><path d="M5 9a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm14 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zM7 9.5h10V17a1.2 1.2 0 0 1-1.2 1.2H15v2.3a1 1 0 0 1-2 0v-2.3h-2v2.3a1 1 0 0 1-2 0v-2.3H8.2A1.2 1.2 0 0 1 7 17zM7.4 8.5a4.6 4.6 0 0 1 9.2 0zm2.1-3.9-.8-1.2a.35.35 0 0 1 .58-.4l.86 1.3a5.6 5.6 0 0 1 3.72 0l.86-1.3a.35.35 0 0 1 .58.4l-.8 1.2M9.6 6.6a.55.55 0 1 0 0-.02zm4.8 0a.55.55 0 1 0 0-.02z"/></svg></div>
+          <h3>Android</h3>
+          <div class="plat-sub" data-lang-ru>APK · порт</div>
+          <div class="plat-sub" data-lang-en style="display:none;">APK · port</div>
+          <ul>
+            <li><code>Latency.apk</code></li>
+            <li><span data-lang-ru>Включите «установка из неизвестных источников»</span><span data-lang-en>Enable “install from unknown sources”</span></li>
+          </ul>
+          <a class="btn btn-ghost btn-block" href="https://github.com/nxrtwee/latency-player/releases/latest" target="_blank" rel="noopener">
+            <span data-lang-ru>Скачать APK</span><span data-lang-en>Download APK</span>
+          </a>
+        </div>
+
+        <!-- iOS -->
+        <div class="dl-card" data-plat="ios">
+          <div class="plat-icon"><svg viewBox="0 0 24 24"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.15-2.8.85-3.5.85s-1.8-.83-3-.81c-1.5.02-2.9.9-3.7 2.27-1.6 2.74-.4 6.8 1.1 9 .75 1.1 1.6 2.3 2.8 2.26 1.1-.05 1.5-.72 2.9-.72s1.7.72 2.9.7c1.2-.02 2-1.1 2.7-2.2.86-1.27 1.2-2.5 1.2-2.56-.03-.01-2.3-.88-2.3-3.5zM14.1 5.8c.62-.75 1.04-1.8.92-2.84-.9.04-2 .6-2.64 1.34-.57.66-1.07 1.73-.94 2.74 1 .08 2.03-.5 2.66-1.24z"/></svg></div>
+          <h3>iOS</h3>
+          <div class="plat-sub" data-lang-ru>Неподписанный IPA · порт</div>
+          <div class="plat-sub" data-lang-en style="display:none;">Unsigned IPA · port</div>
+          <ul>
+            <li><code>Latency-unsigned.ipa</code></li>
+            <li><span data-lang-ru>Сайдлоад через AltStore / Sideloadly</span><span data-lang-en>Sideload via AltStore / Sideloadly</span></li>
+          </ul>
+          <a class="btn btn-ghost btn-block" href="https://github.com/nxrtwee/latency-player/releases/latest" target="_blank" rel="noopener">
+            <span data-lang-ru>Скачать IPA</span><span data-lang-en>Download IPA</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="dl-note reveal">
+        <span data-lang-ru>⚠️ <strong>О мобильных версиях.</strong> Плеер разрабатывался исключительно для десктопа. Мобильные порты рабочие, но местами сырые — эталонный опыт на Windows. Подробности установки и сайдлоада — в <a href="docs.html#install" style="color:var(--cyan)">документации</a>.</span>
+        <span data-lang-en>⚠️ <strong>About mobile builds.</strong> The player was built primarily for desktop. The mobile ports work but are rough around the edges — the reference experience is on Windows. Install &amp; sideload details are in the <a href="docs.html#install" style="color:var(--cyan)">docs</a>.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="cta-band reveal">
+        <h2><span data-lang-ru>Открытый исходный код</span><span data-lang-en>Fully open source</span></h2>
+        <p><span data-lang-ru>Latency написан чистым вайбкодингом — icountedtheblink и Claude. Лицензия MIT: смотрите код, собирайте сами, добавляйте свои источники.</span><span data-lang-en>Latency is pure vibe-coding — icountedtheblink and Claude. MIT licensed: read the code, build it yourself, add your own sources.</span></p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="https://github.com/nxrtwee/latency-player" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+            <span data-lang-ru>Открыть на GitHub</span><span data-lang-en>View on GitHub</span>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="changelog.html"><span data-lang-ru>История версий</span><span data-lang-en>Changelog</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <div class="brand"><img src="assets/img/icon.png" alt="" style="width:28px;height:28px;border-radius:22%;filter:drop-shadow(0 2px 8px rgba(123,107,255,.45));"> <span>Latency</span></div>
+        <p><span data-lang-ru>Кроссплатформенный медиаплеер с подключаемыми источниками. Electron · React · TypeScript.</span><span data-lang-en>A cross-platform media player with pluggable sources. Electron · React · TypeScript.</span></p>
+      </div>
+      <div class="footer-col">
+        <h5 data-lang-ru>Продукт</h5><h5 data-lang-en style="display:none;">Product</h5>
+        <a href="#features"><span data-lang-ru>Возможности</span><span data-lang-en>Features</span></a>
+        <a href="#download"><span data-lang-ru>Загрузки</span><span data-lang-en>Download</span></a>
+        <a href="changelog.html"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></a>
+      </div>
+      <div class="footer-col">
+        <h5 data-lang-ru>Ресурсы</h5><h5 data-lang-en style="display:none;">Resources</h5>
+        <a href="docs.html"><span data-lang-ru>Документация</span><span data-lang-en>Documentation</span></a>
+        <a href="docs.html#faq">FAQ</a>
+        <a href="https://github.com/nxrtwee/latency-player/releases/latest" target="_blank" rel="noopener">Releases</a>
+      </div>
+      <div class="footer-col">
+        <h5>GitHub</h5>
+        <a href="https://github.com/nxrtwee/latency-player" target="_blank" rel="noopener">latency-player</a>
+        <a href="https://github.com/nxrtwee" target="_blank" rel="noopener">@nxrtwee</a>
+        <a href="https://github.com/nxrtwee/latency-player/blob/master/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="year">2026</span> Latency · MIT License</span>
+      <span data-lang-ru>Сделано вайбкодингом — icountedtheblink &amp; Claude</span>
+      <span data-lang-en>Vibe-coded by icountedtheblink &amp; Claude</span>
+    </div>
+  </footer>
+
+</body>
+</html>
