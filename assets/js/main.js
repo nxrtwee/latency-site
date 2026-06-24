@@ -61,6 +61,15 @@
     /* ---------- Lightbox for screenshots ---------- */
     initLightbox();
 
+    /* ---------- Navbar: condense on scroll + active-section spy ---------- */
+    initNav();
+
+    /* ---------- Cover-art wall (home hero backdrop) ---------- */
+    initCoverWall();
+
+    /* ---------- Animated particle backdrop ---------- */
+    initParticles();
+
     /* ---------- Scroll reveal ---------- */
     initReveal();
 
@@ -132,6 +141,194 @@
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") close();
+    });
+  }
+
+  function initNav() {
+    var nav = document.querySelector(".nav");
+    if (!nav) return;
+
+    // Dock into the vertical left rail after scrolling past the hero.
+    // Disabled on narrow screens (mobile keeps the top bar + dropdown).
+    var hero = document.querySelector(".hero");
+    function threshold() { return hero ? Math.max(120, hero.offsetHeight - 160) : 90; }
+    var th = threshold();
+    var onScroll = function () {
+      nav.classList.toggle("docked", window.innerWidth > 760 && window.scrollY > th);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () { th = threshold(); onScroll(); });
+
+    // highlight the nav link of the section currently in view (in-page anchors)
+    var links = nav.querySelectorAll('.nav-links a[href^="#"]');
+    if (!links.length || !("IntersectionObserver" in window)) return;
+    var map = {};
+    links.forEach(function (l) {
+      var id = l.getAttribute("href").slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = l;
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove("active"); });
+          if (map[en.target.id]) map[en.target.id].classList.add("active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
+  }
+
+  function initCoverWall() {
+    var wall = document.getElementById("cover-wall");
+    if (!wall || wall.childElementCount) return;   // build once
+
+    var COVERS = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.jpg","17.png","18.png","19.png","20.png","21.png","22.png","23.png","24.png","25.jpg","26.jpg","27.png","28.png","29.png","30.png","31.jpg","32.png","33.png","34.png","35.jpg","36.jpg","37.jpg","38.png","39.png","40.png","41.png"];
+
+    var COLS = 7;
+    var cols = [];
+    for (var c = 0; c < COLS; c++) cols.push([]);
+    COVERS.forEach(function (name, i) { cols[i % COLS].push(name); });
+
+    var frag = document.createDocumentFragment();
+    cols.forEach(function (list, ci) {
+      var col = document.createElement("div");
+      col.className = "cover-col" + (ci % 2 ? " rev" : "");
+      // duplicate the set so the marquee loops seamlessly at -50%
+      list.concat(list).forEach(function (name) {
+        var img = document.createElement("img");
+        img.src = "assets/img/covers/" + name;
+        img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+        col.appendChild(img);
+      });
+      col.style.animationDuration = (62 + ci * 8) + "s";
+      col.style.animationDelay = "-" + (ci * 6) + "s";
+      frag.appendChild(col);
+    });
+    wall.appendChild(frag);
+  }
+
+  function initParticles() {
+    var canvas = document.getElementById("bg-particles");
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext("2d");
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Neon palette (cyan, magenta, violet) — matches the site accent
+    var COLORS = [[54, 214, 255], [255, 43, 214], [181, 75, 255]];
+
+    // Pre-rendered soft glow sprite per colour (cheap to blit each frame)
+    var sprites = COLORS.map(function (c) {
+      var s = document.createElement("canvas");
+      s.width = s.height = 64;
+      var g = s.getContext("2d");
+      var rg = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      rg.addColorStop(0, "rgba(" + c[0] + "," + c[1] + "," + c[2] + ",1)");
+      rg.addColorStop(0.25, "rgba(" + c[0] + "," + c[1] + "," + c[2] + ",.55)");
+      rg.addColorStop(1, "rgba(" + c[0] + "," + c[1] + "," + c[2] + ",0)");
+      g.fillStyle = rg;
+      g.fillRect(0, 0, 64, 64);
+      return s;
+    });
+
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = 0, H = 0;
+    var dots = [], shards = [];
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+
+    function build() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      var area = W * H;
+      var nDots = Math.min(80, Math.round(area / 21000));
+      var nShards = Math.min(16, Math.round(area / 95000));
+
+      dots = [];
+      for (var i = 0; i < nDots; i++) {
+        dots.push({
+          x: rand(0, W), y: rand(0, H),
+          vx: rand(-0.12, 0.12), vy: rand(-0.28, -0.05),
+          size: rand(6, 20),
+          ci: (Math.random() * COLORS.length) | 0,
+          base: rand(0.15, 0.5), amp: rand(0.05, 0.25),
+          ph: rand(0, Math.PI * 2), sp: rand(0.4, 1.2)
+        });
+      }
+      shards = [];
+      for (var j = 0; j < nShards; j++) {
+        shards.push({
+          x: rand(0, W), y: rand(0, H),
+          vx: rand(-0.1, 0.1), vy: rand(-0.18, 0.05),
+          len: rand(16, 46), rot: rand(0, Math.PI * 2), vr: rand(-0.004, 0.004),
+          ci: (Math.random() * COLORS.length) | 0, alpha: rand(0.05, 0.16)
+        });
+      }
+    }
+
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = "lighter";
+
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i];
+        if (!reduce) {
+          d.x += d.vx; d.y += d.vy;
+          if (d.y < -30) { d.y = H + 30; d.x = rand(0, W); }
+          if (d.x < -30) d.x = W + 30; else if (d.x > W + 30) d.x = -30;
+        }
+        var a = d.base + d.amp * Math.sin(t * 0.001 * d.sp + d.ph);
+        ctx.globalAlpha = a < 0 ? 0 : a;
+        ctx.drawImage(sprites[d.ci], d.x - d.size / 2, d.y - d.size / 2, d.size, d.size);
+      }
+
+      for (var j = 0; j < shards.length; j++) {
+        var s = shards[j];
+        if (!reduce) {
+          s.x += s.vx; s.y += s.vy; s.rot += s.vr;
+          if (s.y < -60) { s.y = H + 60; s.x = rand(0, W); }
+          if (s.y > H + 60) s.y = -60;
+          if (s.x < -60) s.x = W + 60; else if (s.x > W + 60) s.x = -60;
+        }
+        var c = COLORS[s.ci];
+        ctx.globalAlpha = s.alpha;
+        ctx.save();
+        ctx.translate(s.x, s.y);
+        ctx.rotate(s.rot);
+        ctx.beginPath();
+        ctx.moveTo(0, -s.len / 2);
+        ctx.lineTo(s.len * 0.16, s.len / 2);
+        ctx.lineTo(-s.len * 0.16, s.len / 2);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(" + c[0] + "," + c[1] + "," + c[2] + ",.9)";
+        ctx.fill();
+        ctx.restore();
+      }
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = "source-over";
+    }
+
+    var raf = 0;
+    function loop(t) { draw(t); raf = requestAnimationFrame(loop); }
+    function start() { if (!raf && !reduce) raf = requestAnimationFrame(loop); }
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+    build();
+    if (reduce) { draw(0); }   // single static frame
+    else start();
+
+    var rt;
+    window.addEventListener("resize", function () {
+      clearTimeout(rt);
+      rt = setTimeout(function () { build(); if (reduce) draw(0); }, 200);
+    });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop(); else start();
     });
   }
 

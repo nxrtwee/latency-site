@@ -16,11 +16,12 @@
   <link rel="icon" type="image/png" href="assets/img/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/main.js"></script>
 </head>
 <body>
+  <canvas id="bg-particles" aria-hidden="true"></canvas>
 
   <!-- ============ NAV ============ -->
   <header class="nav">
@@ -30,20 +31,38 @@
         <span>Latency</span>
       </a>
       <nav class="nav-links">
-        <a href="#features"><span data-lang-ru>Возможности</span><span data-lang-en>Features</span></a>
-        <a href="#screens"><span data-lang-ru>Скриншоты</span><span data-lang-en>Screenshots</span></a>
-        <a href="#download"><span data-lang-ru>Загрузки</span><span data-lang-en>Download</span></a>
-        <a href="docs.html"><span data-lang-ru>Документация</span><span data-lang-en>Docs</span></a>
-        <a href="changelog.html"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></a>
+        <a href="#features" aria-label="Возможности">
+          <svg class="nav-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span class="nav-txt"><span data-lang-ru>Возможности</span><span data-lang-en>Features</span></span>
+        </a>
+        <a href="#screens" aria-label="Скриншоты">
+          <svg class="nav-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="nav-txt"><span data-lang-ru>Скриншоты</span><span data-lang-en>Screenshots</span></span>
+        </a>
+        <a href="#download" aria-label="Загрузки">
+          <svg class="nav-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+          <span class="nav-txt"><span data-lang-ru>Загрузки</span><span data-lang-en>Download</span></span>
+        </a>
+        <a href="docs.html" aria-label="Документация">
+          <svg class="nav-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span class="nav-txt"><span data-lang-ru>Документация</span><span data-lang-en>Docs</span></span>
+        </a>
+        <a href="changelog.html" aria-label="Обновления">
+          <svg class="nav-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span class="nav-txt"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></span>
+        </a>
       </nav>
       <div class="nav-right">
         <div class="lang-toggle" role="group" aria-label="Language">
           <button data-lang="ru">RU</button>
           <button data-lang="en">EN</button>
         </div>
-        <a class="btn btn-ghost" href="https://github.com/nxrtwee/latency-player" target="_blank" rel="noopener" style="padding:9px 16px;">
+        <a class="nav-ghost" href="https://github.com/nxrtwee/latency-player" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
-          GitHub
+        </a>
+        <a class="nav-dl" href="#download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+          <span data-lang-ru>Скачать</span><span data-lang-en>Download</span>
         </a>
       </div>
       <button class="nav-toggle" aria-label="Menu">
@@ -54,37 +73,33 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <span class="eyebrow">Electron · React · TypeScript</span>
-        <h1>
-          <span data-lang-ru>Latency — музыкальный плеер <span class="gradient-text">нового поколения</span></span>
-          <span data-lang-en>Latency — the <span class="gradient-text">next-generation</span> music player</span>
-        </h1>
-        <p class="hero-lead">
-          <span data-lang-ru>Десктопный плеер уровня Spotify, написанный с нуля. Локальные файлы и SoundCloud через единое ядро — эквалайзер, караоке-тексты, автопилот, офлайн-кэш и собственный неоновый интерфейс.</span>
-          <span data-lang-en>A Spotify-grade desktop player, built from scratch. Local files and SoundCloud through one engine — equalizer, karaoke lyrics, autopilot, offline cache and a custom neon UI.</span>
-        </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" href="#download" data-hero-dl>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-            <span data-hero-label><span data-lang-ru>Скачать</span><span data-lang-en>Download</span></span>
-          </a>
-          <a class="btn btn-ghost btn-lg" href="docs.html">
-            <span data-lang-ru>Документация</span><span data-lang-en>Documentation</span>
-          </a>
-        </div>
-        <div class="hero-meta">
-          <span><b>Windows</b> · <b>Android</b> · <b>iOS</b></span>
-          <span data-lang-ru>🆓 Бесплатно · MIT</span><span data-lang-en>🆓 Free · MIT</span>
-          <span data-lang-ru>🌐 EN / RU</span><span data-lang-en>🌐 EN / RU</span>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="glow-orb"></div>
-        <div class="hero-logo">
-          <img src="assets/img/icon.png" alt="Логотип Latency" width="1030" height="1030" fetchpriority="high">
-        </div>
+    <!-- cover-art wall (columns built by main.js initCoverWall) -->
+    <div class="cover-clip" aria-hidden="true">
+      <div id="cover-wall" class="cover-wall"></div>
+    </div>
+    <div class="cover-veil" aria-hidden="true"></div>
+
+    <!-- spinning vortex backdrop -->
+    <div class="hero-vortex" aria-hidden="true"></div>
+
+    <div class="hero-core">
+      <span class="eyebrow">Electron · React · TypeScript</span>
+      <h1>
+        <span data-lang-ru>LATENCY: <span class="gradient-text">РАСКАЧАЙ ЗВУК</span></span>
+        <span data-lang-en>LATENCY: <span class="gradient-text">UNLEASH THE BEAT</span></span>
+      </h1>
+      <p class="hero-tagline">
+        <span data-lang-ru>Твоя музыка — на скорости</span>
+        <span data-lang-en>Your media, accelerated</span>
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-neon btn-lg" href="#download" data-hero-dl>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+          <span data-hero-label><span data-lang-ru>Скачать</span><span data-lang-en>Download</span></span>
+        </a>
+        <a class="btn btn-ghost btn-lg" href="docs.html">
+          <span data-lang-ru>Документация</span><span data-lang-en>Documentation</span>
+        </a>
       </div>
     </div>
   </section>
@@ -340,7 +355,7 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-about">
-        <div class="brand"><img src="assets/img/icon.png" alt="" style="width:28px;height:28px;border-radius:22%;filter:drop-shadow(0 2px 8px rgba(123,107,255,.45));"> <span>Latency</span></div>
+        <div class="brand"><img src="assets/img/icon.png" alt="" style="width:30px;height:30px;mix-blend-mode:screen;"> <span>Latency</span></div>
         <p><span data-lang-ru>Кроссплатформенный медиаплеер с подключаемыми источниками. Electron · React · TypeScript.</span><span data-lang-en>A cross-platform media player with pluggable sources. Electron · React · TypeScript.</span></p>
       </div>
       <div class="footer-col">

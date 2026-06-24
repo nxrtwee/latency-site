@@ -16,28 +16,33 @@
   --text-dim:      #a9adc9;
   --text-faint:    #6c7193;
 
-  /* Neon accent */
+  /* Neon accent — hot magenta forward, cyan partner */
   --cyan:          #36d6ff;
   --violet:        #9b6bff;
-  --magenta:       #d56bff;
-  --accent:        #8a7bff;
-  --grad:          linear-gradient(120deg, #36d6ff 0%, #7b6bff 48%, #d56bff 100%);
-  --grad-soft:     linear-gradient(120deg, rgba(54,214,255,.18), rgba(213,107,255,.18));
+  --magenta:       #ff2bd6;
+  --magenta-deep:  #b01e9e;
+  --accent:        #b54bff;
+  --grad:          linear-gradient(115deg, #36d6ff 0%, #b54bff 45%, #ff2bd6 100%);
+  --grad-soft:     linear-gradient(120deg, rgba(54,214,255,.18), rgba(255,43,214,.20));
 
   --glow-cyan:     0 0 32px rgba(54, 214, 255, .35);
   --glow-violet:   0 0 40px rgba(123, 107, 255, .35);
+  --glow-magenta:  0 0 42px rgba(255, 43, 214, .45);
+  /* Neon text glow for display headings */
+  --text-glow:     0 0 18px rgba(255,43,214,.45), 0 0 42px rgba(54,214,255,.25);
 
   /* Geometry */
   --radius:        16px;
   --radius-sm:     10px;
   --radius-lg:     24px;
   --maxw:          1160px;
-  --nav-h:         64px;
+  --nav-h:         84px;   /* floating capsule clearance (top gap + bar height) */
 
   --shadow:        0 18px 50px -20px rgba(0,0,0,.8);
   --shadow-card:   0 12px 40px -22px rgba(0,0,0,.9);
 
   --font: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Chakra Petch", "Inter", "Segoe UI", system-ui, sans-serif;
   --mono: "JetBrains Mono", "SF Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
 
   --ease: cubic-bezier(.22, 1, .36, 1);
@@ -58,41 +63,45 @@ body {
   overflow-x: hidden;
 }
 
-/* Ambient background glow */
+/* Calm dark base — depth comes from the particle canvas + hero vortex,
+   not from a busy gradient mesh. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: -3;
   background:
-    radial-gradient(50% 40% at 80% -8%, rgba(123,107,255,.30), transparent 68%),
-    radial-gradient(45% 38% at 8% -4%, rgba(54,214,255,.22), transparent 70%),
-    radial-gradient(40% 35% at 95% 35%, rgba(213,107,255,.16), transparent 70%),
-    radial-gradient(60% 50% at 50% 116%, rgba(123,107,255,.14), transparent 72%),
-    linear-gradient(180deg, #0a0b18 0%, #07070f 40%, var(--bg) 100%);
+    radial-gradient(60% 50% at 50% -10%, rgba(181,75,255,.12), transparent 70%),
+    linear-gradient(180deg, #0b0912 0%, #08070f 45%, var(--bg) 100%);
   pointer-events: none;
 }
-/* Faint grid texture for depth */
-body::after {
-  content: "";
+
+/* Particle/shard backdrop (drawn by main.js initParticles) */
+#bg-particles {
   position: fixed;
   inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgba(124,130,200,.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124,130,200,.045) 1px, transparent 1px);
-  background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
-  mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+  z-index: -2;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  display: block;
 }
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
 h1, h2, h3, h4 { line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+h1, h2 { font-family: var(--font-display); font-weight: 600; }
 h2 { font-size: clamp(1.7rem, 1rem + 2.6vw, 2.7rem); }
 h3 { font-size: 1.25rem; }
+
+/* Display headings in marketing sections: uppercase + neon glow.
+   Scoped to hero / section heads so docs body h2 stay normal-case. */
+.section-head h2 {
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  text-shadow: var(--text-glow);
+}
 
 p { color: var(--text-dim); }
 
@@ -163,46 +172,113 @@ p { color: var(--text-dim); }
 .btn-block { width: 100%; }
 .btn-lg { padding: 16px 30px; font-size: 1.02rem; }
 
-/* ---------- Navbar ---------- */
+/* ============================================================
+   Navbar — full-width band at rest; docks into a vertical
+   left rail (icons-only) once the page is scrolled down.
+   ============================================================ */
 .nav {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 14px;                                   /* safe gap → no seam over the covers */
+  left: 50%;
+  width: min(var(--maxw), calc(100% - 32px));
+  transform: translateX(-50%);
   z-index: 100;
-  height: var(--nav-h);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(17,14,28,.72), rgba(10,8,18,.72));
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 18px 50px -24px rgba(0,0,0,.9),
+    0 0 0 1px rgba(255,43,214,.05),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  transition:
+    width .5s var(--ease), left .5s var(--ease), top .5s var(--ease),
+    transform .5s var(--ease), border-radius .5s var(--ease),
+    background .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+}
+/* neon hairline along the bottom of the capsule */
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 18px; right: 18px; bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(54,214,255,.5), rgba(255,43,214,.55), transparent);
+  opacity: .55;
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+}
+.nav .container {
   display: flex;
   align-items: center;
-  background: rgba(7,7,12,.72);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  border-bottom: 1px solid var(--border-soft);
+  gap: 16px;
+  height: 58px;
+  max-width: none;
+  margin: 0;
+  padding: 0 12px 0 20px;
+  transition: padding .5s var(--ease), height .5s var(--ease);
 }
-.nav .container { display: flex; align-items: center; gap: 20px; }
-.brand { display: flex; align-items: center; gap: 11px; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; }
-.brand img { width: 30px; height: 30px; border-radius: 22%; filter: drop-shadow(0 2px 9px rgba(123,107,255,.5)); }
-.nav-links { display: flex; align-items: center; gap: 4px; margin-left: 18px; }
+
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.16rem;
+  letter-spacing: .01em;
+  text-shadow: 0 0 16px rgba(255,43,214,.32);
+}
+/* logo: screen-blend drops the dark icon tile, leaving just the glow.
+   No `filter` here — it triggers non-retina rasterisation (soft/soapy). */
+.brand img { width: 30px; height: 30px; mix-blend-mode: screen; }
+
+.nav-links { display: flex; align-items: center; gap: 2px; margin-left: 12px; }
 .nav-links a {
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: .92rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-size: .9rem;
   font-weight: 500;
   color: var(--text-dim);
   transition: color .2s, background .2s;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(255,255,255,.05); }
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--text); }
+/* icon shown only in the docked (vertical) state; text otherwise */
+.nav-ico { width: 20px; height: 20px; display: none; flex: 0 0 auto; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.nav-txt { display: inline-flex; }
+/* animated neon underline */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 14px; right: 14px; bottom: 5px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--grad);
+  box-shadow: 0 0 10px rgba(255,43,214,.6);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s var(--ease);
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
 .nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 
 .lang-toggle {
   display: inline-flex;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,.12);
   border-radius: 999px;
   overflow: hidden;
-  background: rgba(255,255,255,.02);
+  background: rgba(255,255,255,.03);
 }
 .lang-toggle button {
-  font-family: inherit;
-  font-size: .8rem;
+  font-family: var(--font-display);
+  font-size: .74rem;
   font-weight: 600;
-  padding: 6px 12px;
+  letter-spacing: .05em;
+  padding: 6px 11px;
   background: none;
   border: none;
   color: var(--text-faint);
@@ -211,11 +287,45 @@ p { color: var(--text-dim); }
 }
 .lang-toggle button.active { color: #0a0a12; background: var(--grad); }
 
+/* compact icon button (GitHub) */
+.nav-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--text-dim);
+  transition: color .2s, border-color .2s, background .2s;
+}
+.nav-ghost:hover { color: var(--text); border-color: rgba(54,214,255,.5); background: rgba(54,214,255,.08); }
+.nav-ghost svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* neon download pill */
+.nav-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  font-size: .8rem;
+  padding: 9px 18px;
+  border-radius: 999px;
+  color: #0a0a12;
+  background: var(--grad);
+  box-shadow: 0 0 24px -6px rgba(255,43,214,.7);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .25s;
+}
+.nav-dl:hover { transform: translateY(-1px); box-shadow: 0 0 34px -3px rgba(255,43,214,.9); filter: brightness(1.06); }
+.nav-dl svg { width: 15px; height: 15px; }
+
 .nav-toggle {
   display: none;
   background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
   width: 40px; height: 40px;
   color: var(--text);
   cursor: pointer;
@@ -224,60 +334,228 @@ p { color: var(--text-dim); }
 }
 .nav-toggle svg { width: 22px; height: 22px; }
 
-/* ---------- Hero ---------- */
-.hero { position: relative; padding: clamp(70px, 11vw, 140px) 0 clamp(50px, 7vw, 90px); overflow: hidden; }
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: 56px;
+/* ---- Docked state: vertical left rail, icons only ---- */
+.nav.docked {
+  top: 50%;
+  left: 14px;
+  width: 70px;
+  transform: translateY(-50%);
+  border-radius: 18px;
+  border-color: rgba(255,43,214,.18);
+  background: linear-gradient(180deg, rgba(13,11,22,.92), rgba(9,8,15,.92));
+  box-shadow: 0 24px 60px -24px rgba(0,0,0,.9), 0 0 32px -14px rgba(255,43,214,.45);
+}
+.nav.docked::after { opacity: 0; }
+.nav.docked .container {
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  height: auto;
+  max-width: none;
+  padding: 14px 0;
+}
+.nav.docked .brand span { display: none; }
+.nav.docked .nav-links {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-left: 0;
+  width: 100%;
+}
+.nav.docked .nav-links a { padding: 11px; border-radius: 12px; }
+.nav.docked .nav-links a::after { display: none; }
+.nav.docked .nav-links a:hover { background: rgba(255,255,255,.06); }
+.nav.docked .nav-txt { display: none; }
+.nav.docked .nav-ico { display: block; }
+.nav.docked .nav-right { flex-direction: column; align-items: center; gap: 10px; margin-left: 0; width: 100%; }
+/* stack RU/EN vertically so it fits the narrow rail */
+.nav.docked .lang-toggle { flex-direction: column; border-radius: 12px; }
+.nav.docked .lang-toggle button { padding: 7px 10px; }
+.nav.docked .nav-dl { padding: 11px; border-radius: 12px; }
+/* !important to beat the html[lang] i18n rule, else EN label shows in the rail */
+.nav.docked .nav-dl span { display: none !important; }
+.nav.docked .nav-dl svg { width: 18px; height: 18px; }
+
+/* ============================================================
+   Hero — cinematic neon stage
+   A full-bleed centered stage: spinning vortex backdrop, real
+   screenshots floating as glass windows, and a glowing core.
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: min(92vh, 880px);
+  display: grid;
+  place-items: center;
+  padding: clamp(90px, 12vw, 150px) 0 clamp(60px, 8vw, 110px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---- Vortex backdrop (decorative) ---- */
+.hero-vortex {
+  position: absolute;
+  z-index: -1;
+  top: 50%; left: 50%;
+  width: min(1500px, 150vw);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+  background:
+    conic-gradient(from 0deg,
+      rgba(255,43,214,.00) 0deg,
+      rgba(255,43,214,.22) 60deg,
+      rgba(54,214,255,.18) 130deg,
+      rgba(181,75,255,.22) 210deg,
+      rgba(255,43,214,.16) 300deg,
+      rgba(255,43,214,.00) 360deg);
+  -webkit-mask-image: radial-gradient(closest-side, #000 12%, rgba(0,0,0,.6) 42%, transparent 72%);
+  mask-image: radial-gradient(closest-side, #000 12%, rgba(0,0,0,.6) 42%, transparent 72%);
+  filter: blur(14px) saturate(135%);
+  will-change: transform;
+  animation: spin 48s linear infinite;
+}
+/* Concentric glow rings + central core flare */
+.hero-vortex::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(closest-side, rgba(255,43,214,.40), transparent 26%),
+    repeating-radial-gradient(circle at 50% 50%,
+      transparent 0 38px,
+      rgba(255,255,255,.035) 38px 39px);
+  -webkit-mask-image: radial-gradient(closest-side, #000 8%, transparent 60%);
+  mask-image: radial-gradient(closest-side, #000 8%, transparent 60%);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- Cover-art wall backdrop (home hero, columns built in main.js) ---- */
+/* non-rotated clip: hosts a screen-aligned mask that fades the covers out
+   toward the bottom (no tilt), so the hero blends into the page seamlessly */
+.cover-clip {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 46%, rgba(0,0,0,0) 90%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 46%, rgba(0,0,0,0) 90%);
+}
+.cover-wall {
+  position: absolute;
+  inset: -22% -12%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  transform: rotate(-7deg) scale(1.45);
+  transform-origin: center;
+  opacity: .5;                        /* covers fill the screen; veil darkens for text */
+  filter: saturate(.95) brightness(.92);
+  pointer-events: none;
+}
+.cover-col {
+  flex: 0 0 auto;
+  width: clamp(94px, 11vw, 148px);
+  display: flex;                       /* flex: item margins don't collapse */
+  flex-direction: column;
+  animation: wallUp linear infinite;
+  will-change: transform;
+}
+.cover-col.rev { animation-name: wallDown; }
+/* margin-bottom (not flex gap) so every item — incl. the last of each set —
+   contributes identical spacing; the duplicated set then tiles exactly at -50%
+   for a seamless, jump-free scroll. */
+.cover-col img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border-radius: 12px;                /* softly rounded corners */
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow: 0 6px 18px -10px rgba(0,0,0,.8);
+  display: block;
+}
+@keyframes wallUp   { from { transform: translateY(0); }    to { transform: translateY(-50%); } }
+@keyframes wallDown { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+
+/* dark veil so the wall sits behind the floating windows + text */
+.cover-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  /* darken under the nav + behind the text, then fade to fully transparent
+     toward the bottom — no opaque band, so the page (particles) shows
+     through continuously and the hero/section boundary is invisible */
+  background:
+    radial-gradient(72% 52% at 50% 42%, rgba(7,7,12,0), rgba(7,7,12,.34) 70%, transparent 100%),
+    linear-gradient(to bottom,
+      rgba(7,7,12,.5) 0%,
+      rgba(7,7,12,.22) 22%,
+      rgba(7,7,12,0) 55%);
+}
+
+/* ---- Hero core (text + CTA) ---- */
+.hero-core {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 880px;
+  padding: 0 16px;
 }
 .hero h1 {
-  font-size: clamp(2.5rem, 1.2rem + 5vw, 4.4rem);
-  letter-spacing: -0.035em;
-  margin-bottom: 22px;
+  font-size: clamp(2.6rem, 1rem + 7vw, 5.6rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: .005em;
+  margin-bottom: 20px;
+  text-shadow: var(--text-glow);
 }
-.hero-lead { font-size: clamp(1.05rem, .95rem + .5vw, 1.28rem); max-width: 540px; margin-bottom: 32px; }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
-.hero-meta { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 30px; color: var(--text-faint); font-size: .88rem; }
+.hero-tagline {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: clamp(.82rem, .7rem + .5vw, 1.05rem);
+  color: var(--cyan);
+  margin-bottom: 30px;
+  text-shadow: 0 0 20px rgba(54,214,255,.45);
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 32px; justify-content: center; color: var(--text-faint); font-size: .88rem; }
 .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
 .hero-meta b { color: var(--text); font-weight: 600; }
 
-/* Hero visual — faux player window mockup */
-.hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
-.hero-visual .glow-orb {
-  position: absolute;
-  width: 90%;
-  aspect-ratio: 1;
-  background: var(--grad);
-  filter: blur(90px);
-  opacity: .38;
-  border-radius: 50%;
-  animation: float 8s var(--ease) infinite;
-}
-/* uses `translate` (not transform) so it composes with the shot's
-   base perspective/rotate transform instead of overriding it */
-@keyframes float { 0%,100% { translate: 0 -8px; } 50% { translate: 0 8px; } }
-
-/* ---- Hero polished logo ---- */
-.hero-logo {
+/* ---- Neon CTA with angular bracket frame ---- */
+.btn-neon {
   position: relative;
-  z-index: 1;
-  width: min(330px, 72%);
-  aspect-ratio: 1;
-  border-radius: 23%;
-  overflow: hidden;
-  background: #0a0a14;
-  filter: drop-shadow(0 22px 46px rgba(123,107,255,.55));
-  animation: float 8s var(--ease) infinite;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #fff;
+  background: rgba(255,43,214,.07);
+  border: 1.5px solid rgba(255,43,214,.7);
+  box-shadow: 0 0 24px -4px rgba(255,43,214,.55), inset 0 0 22px -10px rgba(255,43,214,.6);
+  text-shadow: 0 0 14px rgba(255,43,214,.6);
 }
-.hero-logo img {
-  width: 112%;
-  height: 112%;
-  margin: -6%;
-  display: block;
-  object-fit: cover;
+.btn-neon:hover {
+  transform: translateY(-2px);
+  background: rgba(255,43,214,.14);
+  border-color: var(--magenta);
+  box-shadow: 0 0 40px -2px rgba(255,43,214,.8), inset 0 0 26px -8px rgba(54,214,255,.5);
 }
+/* Cyan corner brackets */
+.btn-neon::before, .btn-neon::after {
+  content: "";
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 2px solid var(--cyan);
+  filter: drop-shadow(0 0 6px rgba(54,214,255,.8));
+}
+.btn-neon::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+.btn-neon::after  { bottom: -4px; right: -4px; border-left: none; border-top: none; }
 
 /* ---------- Feature grid ---------- */
 .feature-grid {
@@ -314,23 +592,78 @@ p { color: var(--text-dim); }
 .gmasonry .gshot { break-inside: avoid; margin-bottom: 22px; }
 
 .gshot { display: flex; flex-direction: column; margin: 0; }
+/* App-window frame: chrome title bar + neon traffic-light dots + glow.
+   Packages every screenshot (small or full-width) as a tidy window. */
 .win {
+  position: relative;
   border-radius: 14px;
+  padding: 34px 8px 8px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-  box-shadow: 0 24px 60px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.025) inset;
+  background: linear-gradient(150deg, rgba(54,214,255,.14), rgba(181,75,255,.10) 50%, rgba(255,43,214,.14));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 26px 60px -30px rgba(0,0,0,.92),
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 0 34px -12px rgba(255,43,214,.30);
   cursor: pointer;
   transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
 }
-.win:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 30px 70px -28px rgba(91,86,200,.55); }
-.win img { display: block; width: 100%; height: auto; background-color: #0a0a12; }
+.win:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,43,214,.5);
+  box-shadow:
+    0 34px 76px -28px rgba(0,0,0,.95),
+    0 0 0 1px rgba(255,43,214,.25) inset,
+    0 0 50px -10px rgba(255,43,214,.5);
+}
+/* chrome title bar */
+.win::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30px;
+  background: linear-gradient(180deg, rgba(18,16,28,.97), rgba(13,11,21,.97));
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  pointer-events: none;
+}
+/* three neon window dots */
+.win::after {
+  content: "";
+  position: absolute;
+  top: 12px; left: 16px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow:
+    15px 0 0 var(--accent), 30px 0 0 var(--magenta),
+    0 0 7px rgba(54,214,255,.85);
+  pointer-events: none;
+  z-index: 1;
+  transition: box-shadow .3s var(--ease);
+}
+.win:hover::after {
+  box-shadow:
+    15px 0 0 var(--accent), 30px 0 0 var(--magenta),
+    0 0 9px rgba(54,214,255,1), 15px 0 9px rgba(181,75,255,.8), 30px 0 9px rgba(255,43,214,.8);
+}
+.win img { display: block; width: 100%; height: auto; border-radius: 8px; background-color: #0a0a12; }
 .gshot .cap {
   text-align: center;
-  margin-top: 13px;
-  font-size: .9rem;
+  margin-top: 15px;
+  font-size: .92rem;
+  font-weight: 500;
   color: var(--text-dim);
   line-height: 1.45;
+}
+/* small neon tick above each caption */
+.gshot .cap::before {
+  content: "";
+  display: block;
+  width: 26px; height: 2px;
+  margin: 0 auto 9px;
+  border-radius: 2px;
+  background: var(--grad);
+  box-shadow: 0 0 10px rgba(255,43,214,.6);
 }
 
 /* ---------- Mobile showcase ---------- */
@@ -601,32 +934,52 @@ html[lang="en"] [data-lang-ru] { display: none !important; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 940px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 36px; text-align: center; }
-  .hero-lead { margin-left: auto; margin-right: auto; }
-  .hero-cta, .hero-meta { justify-content: center; }
-  .hero-visual { order: -1; }
-  .hero-logo { width: min(240px, 56%); }
+  .hero { min-height: auto; padding: clamp(80px, 16vw, 120px) 0 clamp(50px, 10vw, 80px); }
+  .cover-wall { opacity: .22; }
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
   .dl-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
   .docs-wrap { grid-template-columns: 1fr; }
   .docs-side { position: static; display: none; }
 }
 @media (max-width: 760px) {
+  .nav .container { gap: 10px; padding: 0 10px 0 16px; }
   .nav-links { display: none; }
+  .nav-ghost { display: none; }          /* declutter the bar on phones */
   .nav-toggle { display: inline-flex; }
+  /* dropdown panel hanging under the capsule */
   .nav.open .nav-links {
     display: flex; flex-direction: column; gap: 2px;
-    position: absolute; top: var(--nav-h); left: 0; right: 0;
-    background: var(--bg-soft); border-bottom: 1px solid var(--border);
-    padding: 14px 24px; margin: 0;
+    position: absolute; top: calc(100% + 10px); left: 0; right: 0;
+    padding: 10px;
+    background: linear-gradient(180deg, rgba(15,12,25,.98), rgba(9,8,16,.98));
+    border: 1px solid rgba(255,43,214,.18);
+    border-radius: 14px;
+    box-shadow: 0 24px 60px -24px rgba(0,0,0,.9), 0 0 30px -14px rgba(255,43,214,.4);
+    backdrop-filter: blur(16px);
   }
-  .nav.open .nav-links a { padding: 12px 14px; }
+  .nav.open .nav-links a { padding: 12px 14px; border-radius: 8px; }
+  .nav.open .nav-links a::after { display: none; }
+  .nav.open .nav-links a:hover { background: rgba(255,255,255,.05); }
   .gmasonry { columns: 1; }
 }
 @media (max-width: 540px) {
   .feature-grid { grid-template-columns: 1fr; }
+  .hero-cta { gap: 12px; }
   .hero-cta .btn { width: 100%; }
+  .hero-tagline { letter-spacing: .14em; }
+  .win { padding: 32px 6px 6px; }
+  .win::before { height: 28px; }
+  .win::after { top: 11px; }
+  .section { padding: clamp(48px, 12vw, 80px) 0; }
+  .footer-bottom { flex-direction: column; gap: 6px; }
+  /* tighten the capsule: logo-only brand, drop the download label */
+  .brand span { display: none; }
+  .nav-dl { padding: 9px 13px; }
+  .nav-dl span { display: none; }
 }
+
+/* sub-pages (docs/changelog) have no hero — pad content below the fixed nav */
+body.subpage { padding-top: 78px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
