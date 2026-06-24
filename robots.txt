@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://latency-app.fun/sitemap.xml
