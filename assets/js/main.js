@@ -76,6 +76,9 @@
     /* ---------- Docs scrollspy ---------- */
     initScrollSpy();
 
+    /* ---------- Clean in-page anchors (no #hash in the address bar) ---------- */
+    initCleanAnchors();
+
     /* ---------- Footer year ---------- */
     var y = document.getElementById("year");
     if (y) y.textContent = new Date().getFullYear();
@@ -367,5 +370,45 @@
     Object.keys(map).forEach(function (id) {
       io.observe(document.getElementById(id));
     });
+  }
+
+  /* In-page anchors smooth-scroll to their target but never write the #hash
+     into the URL — the address bar stays clean (e.g. ".../" not ".../#features").
+     Trade-off: section deep-links aren't shareable, which is fine for a landing.
+     External links and cross-page #anchors (target id not on this page) are left
+     untouched so they navigate normally. */
+  function initCleanAnchors() {
+    function navOffset() {
+      var v = getComputedStyle(document.documentElement).getPropertyValue("--nav-h");
+      var n = parseInt(v, 10);
+      return (isNaN(n) ? 84 : n) + 16;
+    }
+    function scrollToId(id, smooth) {
+      var el = id && document.getElementById(id);
+      if (!el) return false;
+      var y = el.getBoundingClientRect().top + window.pageYOffset - navOffset();
+      window.scrollTo({ top: y < 0 ? 0 : y, behavior: smooth ? "smooth" : "auto" });
+      return true;
+    }
+    function stripHash() {
+      if (window.history && history.replaceState && location.hash) {
+        history.replaceState(null, "", location.pathname + location.search);
+      }
+    }
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      var href = a.getAttribute("href");
+      if (!href || href === "#") return;
+      if (!document.getElementById(href.slice(1))) return;  // unknown target → default behaviour
+      e.preventDefault();
+      scrollToId(href.slice(1), true);   // smooth on click
+      stripHash();
+    });
+    // opened with a #hash (old shared link / reload): jump there instantly, then clean it
+    if (location.hash.length > 1) {
+      var id = location.hash.slice(1);
+      window.addEventListener("load", function () { if (scrollToId(id, false)) stripHash(); });
+    }
   }
 })();

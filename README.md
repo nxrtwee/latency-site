@@ -8,8 +8,8 @@
 ```
 latency site/
 ├── index.html          лендинг + загрузки + галерея скриншотов
-├── docs.html           документация (установка, SoundCloud, Discord, FAQ…)
-├── changelog.html      история версий (таймлайн)
+├── docs/index.html     документация → чистый URL /docs (установка, SoundCloud, Discord, FAQ…)
+├── changelog/index.html  история версий → чистый URL /changelog (таймлайн)
 ├── .nojekyll           чтобы GitHub Pages не трогал папки
 └── assets/
     ├── css/styles.css   дизайн-система (тёмная тема, неоновый акцент)
@@ -57,7 +57,7 @@ python -m http.server 8080
 
 При выходе новой версии Latency поправьте:
 - номер версии и имена файлов в секции `#download` (`index.html`);
-- добавьте блок версии в `changelog.html`;
+- добавьте блок версии в `changelog/index.html`;
 - ссылки на загрузку ведут на `releases/latest` — их менять не нужно.
 
 ---

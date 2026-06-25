@@ -9,37 +9,78 @@
   <meta name="theme-color" content="#07070c">
   <link rel="canonical" href="https://latency-app.fun/">
 
+  <!-- Search-engine ownership verification — paste the codes from
+       Google Search Console / Yandex Webmaster here, then re-deploy. -->
+  <!-- <meta name="google-site-verification" content="PASTE_GOOGLE_CODE"> -->
+  <!-- <meta name="yandex-verification" content="PASTE_YANDEX_CODE"> -->
+
   <!-- Open Graph -->
   <meta property="og:title" content="Latency — кроссплатформенный медиаплеер">
   <meta property="og:description" content="Локальные файлы и SoundCloud, эквалайзер, караоке, автопилот. Windows · Android · iOS.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://latency-app.fun/">
-  <meta property="og:image" content="https://latency-app.fun/assets/img/icon.png">
+  <meta property="og:image" content="https://latency-app.fun/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Latency — медиаплеер: раскачай звук">
   <meta property="og:site_name" content="Latency">
+  <meta property="og:locale" content="ru_RU">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Latency — кроссплатформенный медиаплеер">
   <meta name="twitter:description" content="Локальные файлы и SoundCloud, эквалайзер, караоке, автопилот. Windows · Android · iOS.">
-  <meta name="twitter:image" content="https://latency-app.fun/assets/img/icon.png">
+  <meta name="twitter:image" content="https://latency-app.fun/assets/img/og.png">
 
   <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Latency",
-    "alternateName": "Latency медиаплеер",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Windows, Android, iOS",
-    "description": "Кроссплатформенный медиаплеер: локальные файлы и SoundCloud, эквалайзер, караоке-тексты, автопилот и офлайн-кэш.",
-    "url": "https://latency-app.fun/",
-    "image": "https://latency-app.fun/assets/img/icon.png",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://latency-app.fun/#app",
+        "name": "Latency",
+        "alternateName": ["Latency медиаплеер", "Latency плеер", "Latency music player"],
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Windows, Android, iOS",
+        "description": "Кроссплатформенный медиаплеер: локальные файлы и SoundCloud, эквалайзер, караоке-тексты, автопилот и офлайн-кэш.",
+        "url": "https://latency-app.fun/",
+        "image": "https://latency-app.fun/assets/img/og.png",
+        "screenshot": [
+          "https://latency-app.fun/assets/img/shots/home.png",
+          "https://latency-app.fun/assets/img/shots/karaoke.png",
+          "https://latency-app.fun/assets/img/shots/track.png"
+        ],
+        "downloadUrl": "https://github.com/nxrtwee/latency-player/releases/latest",
+        "softwareVersion": "latest",
+        "author": { "@id": "https://latency-app.fun/#author" },
+        "sameAs": [
+          "https://github.com/nxrtwee/latency-player",
+          "https://github.com/nxrtwee/latency-player/releases"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://latency-app.fun/#website",
+        "name": "Latency",
+        "url": "https://latency-app.fun/",
+        "inLanguage": "ru",
+        "about": { "@id": "https://latency-app.fun/#app" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://latency-app.fun/#author",
+        "name": "nxrtwee",
+        "url": "https://github.com/nxrtwee",
+        "sameAs": ["https://github.com/nxrtwee"]
+      }
+    ]
   }
   </script>
 
@@ -56,7 +97,7 @@
   <!-- ============ NAV ============ -->
   <header class="nav">
     <div class="container">
-      <a href="index.html" class="brand">
+      <a href="/" class="brand">
         <img src="assets/img/icon.png" alt="Latency">
         <span>Latency</span>
       </a>
@@ -73,11 +114,11 @@
           <svg class="nav-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
           <span class="nav-txt"><span data-lang-ru>Загрузки</span><span data-lang-en>Download</span></span>
         </a>
-        <a href="docs.html" aria-label="Документация">
+        <a href="/docs/" aria-label="Документация">
           <svg class="nav-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           <span class="nav-txt"><span data-lang-ru>Документация</span><span data-lang-en>Docs</span></span>
         </a>
-        <a href="changelog.html" aria-label="Обновления">
+        <a href="/changelog/" aria-label="Обновления">
           <svg class="nav-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <span class="nav-txt"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></span>
         </a>
@@ -127,7 +168,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
           <span data-hero-label><span data-lang-ru>Скачать</span><span data-lang-en>Download</span></span>
         </a>
-        <a class="btn btn-ghost btn-lg" href="docs.html">
+        <a class="btn btn-ghost btn-lg" href="/docs/">
           <span data-lang-ru>Документация</span><span data-lang-en>Documentation</span>
         </a>
       </div>
@@ -358,8 +399,8 @@
       </div>
 
       <div class="dl-note reveal">
-        <span data-lang-ru>⚠️ <strong>О мобильных версиях.</strong> Плеер разрабатывался исключительно для десктопа. Мобильные порты рабочие, но местами сырые — эталонный опыт на Windows. Подробности установки и сайдлоада — в <a href="docs.html#install" style="color:var(--cyan)">документации</a>.</span>
-        <span data-lang-en>⚠️ <strong>About mobile builds.</strong> The player was built primarily for desktop. The mobile ports work but are rough around the edges — the reference experience is on Windows. Install &amp; sideload details are in the <a href="docs.html#install" style="color:var(--cyan)">docs</a>.</span>
+        <span data-lang-ru>⚠️ <strong>О мобильных версиях.</strong> Плеер разрабатывался исключительно для десктопа. Мобильные порты рабочие, но местами сырые — эталонный опыт на Windows. Подробности установки и сайдлоада — в <a href="/docs/#install" style="color:var(--cyan)">документации</a>.</span>
+        <span data-lang-en>⚠️ <strong>About mobile builds.</strong> The player was built primarily for desktop. The mobile ports work but are rough around the edges — the reference experience is on Windows. Install &amp; sideload details are in the <a href="/docs/#install" style="color:var(--cyan)">docs</a>.</span>
       </div>
     </div>
   </section>
@@ -375,7 +416,7 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
             <span data-lang-ru>Открыть на GitHub</span><span data-lang-en>View on GitHub</span>
           </a>
-          <a class="btn btn-ghost btn-lg" href="changelog.html"><span data-lang-ru>История версий</span><span data-lang-en>Changelog</span></a>
+          <a class="btn btn-ghost btn-lg" href="/changelog/"><span data-lang-ru>История версий</span><span data-lang-en>Changelog</span></a>
         </div>
       </div>
     </div>
@@ -392,12 +433,12 @@
         <h5 data-lang-ru>Продукт</h5><h5 data-lang-en style="display:none;">Product</h5>
         <a href="#features"><span data-lang-ru>Возможности</span><span data-lang-en>Features</span></a>
         <a href="#download"><span data-lang-ru>Загрузки</span><span data-lang-en>Download</span></a>
-        <a href="changelog.html"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></a>
+        <a href="/changelog/"><span data-lang-ru>Обновления</span><span data-lang-en>Changelog</span></a>
       </div>
       <div class="footer-col">
         <h5 data-lang-ru>Ресурсы</h5><h5 data-lang-en style="display:none;">Resources</h5>
-        <a href="docs.html"><span data-lang-ru>Документация</span><span data-lang-en>Documentation</span></a>
-        <a href="docs.html#faq">FAQ</a>
+        <a href="/docs/"><span data-lang-ru>Документация</span><span data-lang-en>Documentation</span></a>
+        <a href="/docs/#faq">FAQ</a>
         <a href="https://github.com/nxrtwee/latency-player/releases/latest" target="_blank" rel="noopener">Releases</a>
       </div>
       <div class="footer-col">
