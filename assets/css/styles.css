@@ -396,8 +396,11 @@ p { color: var(--text-dim); }
 .hero-vortex {
   position: absolute;
   z-index: -1;
-  top: 50%; left: 50%;
-  width: min(1500px, 150vw);
+  /* sit behind the headline (raised above centre) and stay compact so the
+     glow's soft edge never reaches the empty lower zone where it read as a
+     seam — the colour pool lives inside the busy cover/text area. */
+  top: 42%; left: 50%;
+  width: min(760px, 82vw);
   aspect-ratio: 1;
   translate: -50% -50%;
   pointer-events: none;
@@ -409,9 +412,11 @@ p { color: var(--text-dim); }
       rgba(181,75,255,.22) 210deg,
       rgba(255,43,214,.16) 300deg,
       rgba(255,43,214,.00) 360deg);
-  -webkit-mask-image: radial-gradient(closest-side, #000 12%, rgba(0,0,0,.6) 42%, transparent 72%);
-  mask-image: radial-gradient(closest-side, #000 12%, rgba(0,0,0,.6) 42%, transparent 72%);
-  filter: blur(14px) saturate(135%);
+  /* long, gentle alpha tail (slope eases to zero) + heavy blur so the glow
+     has no perceptible disk edge — that lower arc was the real hero seam. */
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0,0,0,.68) 34%, rgba(0,0,0,.26) 58%, transparent 86%);
+  mask-image: radial-gradient(closest-side, #000 0%, rgba(0,0,0,.68) 34%, rgba(0,0,0,.26) 58%, transparent 86%);
+  filter: blur(28px) saturate(135%);
   will-change: transform;
   animation: spin 48s linear infinite;
 }
@@ -985,8 +990,8 @@ html[lang="en"] [data-lang-ru] { display: none !important; }
   .win::after { top: 11px; }
   .section { padding: clamp(48px, 12vw, 80px) 0; }
   .footer-bottom { flex-direction: column; gap: 6px; }
-  /* tighten the capsule: logo-only brand, drop the download label */
-  .brand span { display: none; }
+  /* keep the wordmark visible (icon alone read as empty); just trim it down */
+  .brand span { font-size: 1.04rem; }
   .nav-dl { padding: 9px 13px; }
   .nav-dl span { display: none; }
 }
