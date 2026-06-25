@@ -439,8 +439,17 @@ p { color: var(--text-dim); }
   z-index: -4;
   overflow: hidden;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 46%, rgba(0,0,0,0) 90%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 46%, rgba(0,0,0,0) 90%);
+  /* eased multi-stop fade: the alpha slope approaches zero gradually so the
+     covers dissolve with no perceptible end-point line (the old single 90%
+     stop made a soft but visible seam). */
+  -webkit-mask-image: linear-gradient(to bottom,
+    #000 0%, #000 40%,
+    rgba(0,0,0,.78) 58%, rgba(0,0,0,.42) 72%, rgba(0,0,0,.16) 84%,
+    rgba(0,0,0,0) 94%);
+  mask-image: linear-gradient(to bottom,
+    #000 0%, #000 40%,
+    rgba(0,0,0,.78) 58%, rgba(0,0,0,.42) 72%, rgba(0,0,0,.16) 84%,
+    rgba(0,0,0,0) 94%);
 }
 .cover-wall {
   position: absolute;
@@ -487,9 +496,13 @@ p { color: var(--text-dim); }
   pointer-events: none;
   /* darken under the nav + behind the text, then fade to fully transparent
      toward the bottom — no opaque band, so the page (particles) shows
-     through continuously and the hero/section boundary is invisible */
+     through continuously and the hero/section boundary is invisible.
+     Both gradients are MONOTONIC (no mid-stop darker than its ends), so
+     no elliptical ring/seam can form where the covers fade out. */
   background:
-    radial-gradient(72% 52% at 50% 42%, rgba(7,7,12,0), rgba(7,7,12,.34) 70%, transparent 100%),
+    radial-gradient(58% 46% at 50% 44%,
+      rgba(7,7,12,.42),
+      rgba(7,7,12,0) 78%),
     linear-gradient(to bottom,
       rgba(7,7,12,.5) 0%,
       rgba(7,7,12,.22) 22%,
