@@ -605,11 +605,10 @@ p { color: var(--text-dim); }
 .card p { font-size: .94rem; }
 
 /* ---------- Screenshots gallery ---------- */
-.gallery { display: flex; flex-direction: column; gap: 26px; }
-.gmasonry { columns: 2; column-gap: 22px; }
-.gmasonry .gshot { break-inside: avoid; margin-bottom: 22px; }
-
-.gshot { display: flex; flex-direction: column; margin: 0; }
+/* compact masonry of small app-window cards — full (uncropped) shots, and the
+   columns self-balance so there's never a lonely half-empty last row */
+.shot-grid { columns: 3; column-gap: 20px; }
+.gshot { display: flex; flex-direction: column; margin: 0 0 20px; break-inside: avoid; }
 /* App-window frame: chrome title bar + neon traffic-light dots + glow.
    Packages every screenshot (small or full-width) as a tidy window. */
 .win {
@@ -664,7 +663,22 @@ p { color: var(--text-dim); }
     15px 0 0 var(--accent), 30px 0 0 var(--magenta),
     0 0 9px rgba(54,214,255,1), 15px 0 9px rgba(181,75,255,.8), 30px 0 9px rgba(255,43,214,.8);
 }
+/* show each shot in full at its natural aspect ratio (scales with the column) */
 .win img { display: block; width: 100%; height: auto; border-radius: 8px; background-color: #0a0a12; }
+/* cursor-tracked glare sweep for the 3D-tilt windows (JS sets --mx/--my) */
+.win-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity .35s var(--ease);
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 0%),
+              rgba(255,255,255,.18), rgba(255,255,255,0) 60%);
+  mix-blend-mode: screen;
+}
+.win.tilting .win-glare { opacity: 1; }
 .gshot .cap {
   text-align: center;
   margin-top: 15px;
@@ -684,29 +698,62 @@ p { color: var(--text-dim); }
   box-shadow: 0 0 10px rgba(255,43,214,.6);
 }
 
-/* ---------- Mobile showcase ---------- */
+/* ---------- Mobile showcase — fanned deck ---------- */
 .phones {
   display: flex;
   justify-content: center;
-  gap: clamp(14px, 3vw, 34px);
-  flex-wrap: wrap;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  padding: 76px 0 52px;
+  perspective: 1400px;
+  --mid: 3;
 }
+/* The phones sit in a fixed fan — no hover motion, no glow. The outer .phone
+   is an upright box that overlaps its neighbours, so it must NOT catch pointer
+   events; instead the rotated .phone-card catches them, making the click target
+   match exactly what you see (and the top-painted card wins any overlap). */
 .phone {
-  width: clamp(150px, 20vw, 208px);
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(130px, 15vw, 188px);
+  margin: 0 calc(-1 * clamp(28px, 3.4vw, 52px));
+  z-index: var(--i);
+  pointer-events: none;
+}
+.phone-card {
   border-radius: 30px;
   padding: 8px;
   background: linear-gradient(160deg, #1c1d30, #0c0c16);
   border: 1px solid var(--border);
   box-shadow: 0 30px 70px -28px rgba(91,86,200,.65);
-  transition: transform .35s var(--ease);
+  transform-origin: bottom center;
+  /* fan: rotate around bottom, drop the outer cards along a gentle arc */
+  transform:
+    rotate(calc((var(--i) - var(--mid)) * 7deg))
+    translateY(calc((var(--i) - var(--mid)) * (var(--i) - var(--mid)) * 7px));
+  pointer-events: auto;
+  cursor: pointer;
 }
-.phone:nth-child(odd) { transform: translateY(14px); }
-.phone:hover { transform: translateY(0) scale(1.02); }
-.phone img {
+.phone-card img {
   width: 100%; border-radius: 23px; display: block;
   border: 1px solid rgba(255,255,255,.04);
 }
-.phone-cap { text-align: center; margin-top: 12px; font-size: .82rem; color: var(--text-faint); line-height: 1.4; }
+.phones-hint {
+  text-align: center;
+  margin-top: 10px;
+  font-size: .85rem;
+  color: var(--text-faint);
+}
+/* Stack on narrow screens — no fan, no overlap */
+@media (max-width: 860px) {
+  .phones { flex-wrap: wrap; gap: clamp(14px, 4vw, 30px); padding: 8px 0 0; perspective: none; }
+  .phone {
+    width: clamp(140px, 40vw, 200px);
+    margin: 0;
+    z-index: auto !important;
+  }
+  .phone-card { transform: none !important; }
+}
 
 /* Lightbox */
 .lightbox {
@@ -978,10 +1025,11 @@ html[lang="en"] [data-lang-ru] { display: none !important; }
   .nav.open .nav-links a { padding: 12px 14px; border-radius: 8px; }
   .nav.open .nav-links a::after { display: none; }
   .nav.open .nav-links a:hover { background: rgba(255,255,255,.05); }
-  .gmasonry { columns: 1; }
+  .shot-grid { columns: 2; }
 }
 @media (max-width: 540px) {
   .feature-grid { grid-template-columns: 1fr; }
+  .shot-grid { columns: 1; max-width: 420px; margin: 0 auto; }
   .hero-cta { gap: 12px; }
   .hero-cta .btn { width: 100%; }
   .hero-tagline { letter-spacing: .14em; }

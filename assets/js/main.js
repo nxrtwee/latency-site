@@ -73,6 +73,9 @@
     /* ---------- Scroll reveal ---------- */
     initReveal();
 
+    /* ---------- 3D cursor-tilt for desktop screenshots ---------- */
+    initTilt();
+
     /* ---------- Docs scrollspy ---------- */
     initScrollSpy();
 
@@ -332,6 +335,50 @@
     });
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) stop(); else start();
+    });
+  }
+
+  /* Premium parallax: each .win screenshot tilts in 3D toward the cursor and
+     a soft glare follows it. Only on fine-pointer, motion-OK devices. The tilt
+     is applied as an inline transform (overrides the CSS hover lift) and is
+     fully reset on pointerleave — no layout shift, so it can't flicker. */
+  function initTilt() {
+    if (!window.matchMedia) return;
+    if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var MAX = 6; // degrees at the edges
+    document.querySelectorAll(".win").forEach(function (win) {
+      var glare = document.createElement("span");
+      glare.className = "win-glare";
+      win.appendChild(glare);
+
+      var raf = 0, ry = 0, rx = 0;
+      function apply() {
+        raf = 0;
+        win.style.transform =
+          "perspective(900px) rotateX(" + rx + "deg) rotateY(" + ry + "deg) translateY(-6px) scale(1.02)";
+      }
+      win.addEventListener("mouseenter", function () {
+        win.classList.add("tilting");
+        win.style.transition = "transform .12s ease-out";
+      });
+      win.addEventListener("mousemove", function (e) {
+        var r = win.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;   // -0.5 … 0.5
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        ry = px * MAX * 2;     // rotateY follows horizontal
+        rx = -py * MAX * 2;    // rotateX follows vertical (inverted)
+        glare.style.setProperty("--mx", ((px + 0.5) * 100).toFixed(1) + "%");
+        glare.style.setProperty("--my", ((py + 0.5) * 100).toFixed(1) + "%");
+        if (!raf) raf = requestAnimationFrame(apply);
+      });
+      win.addEventListener("mouseleave", function () {
+        if (raf) { cancelAnimationFrame(raf); raf = 0; }
+        win.classList.remove("tilting");
+        win.style.transition = "transform .5s var(--ease)";
+        win.style.transform = "";
+      });
     });
   }
 

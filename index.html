@@ -49,8 +49,8 @@
         "image": "https://latency-app.fun/assets/img/og.png",
         "screenshot": [
           "https://latency-app.fun/assets/img/shots/home.png",
-          "https://latency-app.fun/assets/img/shots/karaoke.png",
-          "https://latency-app.fun/assets/img/shots/track.png"
+          "https://latency-app.fun/assets/img/shots/fullscreen.png",
+          "https://latency-app.fun/assets/img/shots/comments.png"
         ],
         "downloadUrl": "https://github.com/nxrtwee/latency-player/releases/latest",
         "softwareVersion": "latest",
@@ -182,8 +182,8 @@
         <span class="eyebrow" data-lang-ru>Возможности</span><span class="eyebrow" data-lang-en>Features</span>
         <h2><span data-lang-ru>Всё, что нужно для прослушивания</span><span data-lang-en>Everything you need to listen</span></h2>
         <p>
-          <span data-lang-ru>Архитектура подключаемых источников: локальные файлы и SoundCloud работают одинаково, новый источник — это один интерфейс.</span>
-          <span data-lang-en>A pluggable-source architecture: local files and SoundCloud behave identically, and a new source is just one interface.</span>
+          <span data-lang-ru>Архитектура подключаемых источников: локальные файлы, SoundCloud и Яндекс Музыка работают одинаково, новый источник — это один интерфейс.</span>
+          <span data-lang-en>A pluggable-source architecture: local files, SoundCloud and Yandex Music behave identically, and a new source is just one interface.</span>
         </p>
       </div>
 
@@ -197,6 +197,16 @@
           <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.7-1.5A4 4 0 0 0 6 19z"/><path d="M6 19V11M9 19v-9M12 19v-6"/></svg></div>
           <h3>SoundCloud</h3>
           <p><span data-lang-ru>Поиск треков и артистов, стрим (progressive + HLS), вход в аккаунт, персональные миксы и лайки.</span><span data-lang-en>Track &amp; artist search, streaming (progressive + HLS), account login, personal mixes and likes.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M10 8.5l5 3.5-5 3.5z"/></svg></div>
+          <h3><span data-lang-ru>Яндекс Музыка</span><span data-lang-en>Yandex Music</span></h3>
+          <p><span data-lang-ru>Третий источник: вход своим аккаунтом и полные треки по подписке Яндекс Плюс. Работает в России без VPN.</span><span data-lang-en>A third source: log in with your account and stream full tracks via a Yandex Plus subscription. Works in Russia without a VPN.</span></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.5 5.5a9 9 0 0 0 0 13M18.5 5.5a9 9 0 0 1 0 13"/></svg></div>
+          <h3><span data-lang-ru>Моя волна</span><span data-lang-en>My Wave</span></h3>
+          <p><span data-lang-ru>Бесконечный персональный поток Яндекс Музыки прямо на главной — подстраивается под то, что вы слушаете.</span><span data-lang-en>An endless personal Yandex Music stream right on Home — it adapts to what you listen to.</span></p>
         </div>
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V14M5 10V3M12 21V12M12 8V3M19 21V16M19 12V3"/><path d="M2 14h6M9 8h6M16 16h6"/></svg></div>
@@ -216,7 +226,7 @@
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg></div>
           <h3><span data-lang-ru>Офлайн-кэш</span><span data-lang-en>Offline cache</span></h3>
-          <p><span data-lang-ru>Скачанные треки SoundCloud играют без интернета — вкладка «Скачанное» в сайдбаре.</span><span data-lang-en>Downloaded SoundCloud tracks play without internet — a “Downloaded” tab in the sidebar.</span></p>
+          <p><span data-lang-ru>Скачанные треки играют без интернета — вкладка «Скачанное» в сайдбаре.</span><span data-lang-en>Downloaded tracks play without internet — a “Downloaded” tab in the sidebar.</span></p>
         </div>
         <div class="card">
           <div class="icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
@@ -247,66 +257,73 @@
     <div class="container">
       <div class="section-head center reveal">
         <span class="eyebrow" data-lang-ru>Интерфейс</span><span class="eyebrow" data-lang-en>Interface</span>
-        <h2><span data-lang-ru>Собственный неоновый интерфейс</span><span data-lang-en>A custom neon interface</span></h2>
-        <p><span data-lang-ru>Тёмная тема, неоновый акцент, три колонки, реактивный визуализатор. Кликните, чтобы увеличить.</span><span data-lang-en>Dark theme, neon accent, three columns, a reactive visualizer. Click to enlarge.</span></p>
+        <h2><span data-lang-ru>Собственный уникальный интерфейс</span><span data-lang-en>A custom, one-of-a-kind interface</span></h2>
+        <p><span data-lang-ru>Тёмная тема, настраиваемый акцент (на скриншотах — голубая палитра), реактивный визуализатор и кастомные обложки с фоном. Кликните, чтобы увеличить.</span><span data-lang-en>Dark theme, a customizable accent (the shots use the cyan palette), a reactive visualizer and custom covers &amp; backgrounds. Click to enlarge.</span></p>
       </div>
 
-      <div class="gallery reveal">
-
-        <!-- Home — full -->
+      <div class="shot-grid reveal">
         <figure class="gshot">
           <div class="win" data-full="assets/img/shots/home.png">
-            <img src="assets/img/shots/home.png" width="1919" height="1032" alt="Главный экран Latency" loading="lazy">
+            <img src="assets/img/shots/home.png" width="1919" height="1079" alt="Главный экран Latency" loading="lazy">
           </div>
-          <figcaption class="cap"><span data-lang-ru>Главная: персональные миксы, библиотека и мини-плеер с визуализатором</span><span data-lang-en>Home: personal mixes, library and a mini-player with visualizer</span></figcaption>
+          <figcaption class="cap"><span data-lang-ru>Главная и «Моя волна»</span><span data-lang-en>Home &amp; “My Wave”</span></figcaption>
         </figure>
 
-        <!-- Cropped views -->
-        <div class="gmasonry">
-          <figure class="gshot">
-            <div class="win" data-full="assets/img/shots/search.png">
-              <img src="assets/img/shots/search.png" width="1283" height="433" alt="Поиск" loading="lazy">
-            </div>
-            <figcaption class="cap"><span data-lang-ru>Поиск трека по строчке из песни</span><span data-lang-en>Search a track by a lyric line</span></figcaption>
-          </figure>
-
-          <figure class="gshot">
-            <div class="win" data-full="assets/img/shots/liked.png">
-              <img src="assets/img/shots/liked.png" width="1268" height="596" alt="Любимое" loading="lazy">
-            </div>
-            <figcaption class="cap"><span data-lang-ru>«Любимое» — лайки треков любого источника</span><span data-lang-en>“Liked” — track likes from any source</span></figcaption>
-          </figure>
-
-          <figure class="gshot">
-            <div class="win" data-full="assets/img/shots/track.png">
-              <img src="assets/img/shots/track.png" width="1284" height="854" alt="Страница трека и комментарии" loading="lazy">
-            </div>
-            <figcaption class="cap"><span data-lang-ru>Страница трека: волна, визуализатор и комментарии по таймкодам</span><span data-lang-en>Track page: waveform, visualizer and timecoded comments</span></figcaption>
-          </figure>
-
-          <figure class="gshot">
-            <div class="win" data-full="assets/img/shots/profile.png">
-              <img src="assets/img/shots/profile.png" width="1279" height="708" alt="Профиль" loading="lazy">
-            </div>
-            <figcaption class="cap"><span data-lang-ru>Профиль: статистика и недавние артисты</span><span data-lang-en>Profile: stats and recent artists</span></figcaption>
-          </figure>
-
-          <figure class="gshot">
-            <div class="win" data-full="assets/img/shots/settings.png">
-              <img src="assets/img/shots/settings.png" width="771" height="1028" alt="Настройки" loading="lazy">
-            </div>
-            <figcaption class="cap"><span data-lang-ru>Настройки: темы, акцент, фон, эквалайзер</span><span data-lang-en>Settings: themes, accent, background, EQ</span></figcaption>
-          </figure>
-        </div>
-
-        <!-- Karaoke — full -->
         <figure class="gshot">
-          <div class="win" data-full="assets/img/shots/karaoke.png">
-            <img src="assets/img/shots/karaoke.png" width="1919" height="1030" alt="Полноэкранное караоке" loading="lazy">
+          <div class="win" data-full="assets/img/shots/search.png">
+            <img src="assets/img/shots/search.png" width="1382" height="650" alt="Поиск" loading="lazy">
           </div>
-          <figcaption class="cap"><span data-lang-ru>Полноэкранный плеер с караоке-текстом</span><span data-lang-en>Fullscreen player with karaoke lyrics</span></figcaption>
+          <figcaption class="cap"><span data-lang-ru>Поиск по строчке из песни</span><span data-lang-en>Search by a lyric line</span></figcaption>
         </figure>
 
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/liked.png">
+            <img src="assets/img/shots/liked.png" width="1363" height="935" alt="Любимое" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>«Любимое» с любого источника</span><span data-lang-en>“Liked” from any source</span></figcaption>
+        </figure>
+
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/comments.png">
+            <img src="assets/img/shots/comments.png" width="1387" height="834" alt="Комментарии по таймкодам" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>Комментарии по таймкодам</span><span data-lang-en>Timecoded comments</span></figcaption>
+        </figure>
+
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/wave.png">
+            <img src="assets/img/shots/wave.png" width="1379" height="952" alt="Моя волна" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>«Моя волна» — поток Яндекс Музыки</span><span data-lang-en>“My Wave” — a Yandex Music stream</span></figcaption>
+        </figure>
+
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/profile.png">
+            <img src="assets/img/shots/profile.png" width="1378" height="609" alt="Профиль" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>Профиль и статистика</span><span data-lang-en>Profile &amp; stats</span></figcaption>
+        </figure>
+
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/artist.png">
+            <img src="assets/img/shots/artist.png" width="1372" height="860" alt="Страница артиста" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>Страница артиста с его треками</span><span data-lang-en>An artist page with their tracks</span></figcaption>
+        </figure>
+
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/album.png">
+            <img src="assets/img/shots/album.png" width="1372" height="887" alt="Альбом" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>Альбом целиком</span><span data-lang-en>A full album</span></figcaption>
+        </figure>
+
+        <figure class="gshot">
+          <div class="win" data-full="assets/img/shots/fullscreen.png">
+            <img src="assets/img/shots/fullscreen.png" width="1919" height="1079" alt="Полноэкранное караоке" loading="lazy">
+          </div>
+          <figcaption class="cap"><span data-lang-ru>Полноэкранное караоке со своим фоном</span><span data-lang-en>Fullscreen karaoke with a custom background</span></figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -320,24 +337,30 @@
         <p><span data-lang-ru>Тот же плеер на iOS и Android — порт на Capacitor с фоновым воспроизведением и медиа-уведомлением. Эталонный опыт всё же на десктопе.</span><span data-lang-en>The same player on iOS and Android — a Capacitor port with background playback and a media notification. The reference experience is still on desktop.</span></p>
       </div>
 
-      <div class="phones reveal">
-        <div class="phone">
-          <img src="assets/img/mobile/home.jpg" alt="Мобильная главная" loading="lazy">
-          <div class="phone-cap"><span data-lang-ru>Главная</span><span data-lang-en>Home</span></div>
+      <div class="phones reveal" style="--mid:3;">
+        <div class="phone" style="--i:0" data-full="assets/img/mobile/home.jpg">
+          <div class="phone-card"><img src="assets/img/mobile/home.jpg" alt="Мобильная главная" loading="lazy"></div>
         </div>
-        <div class="phone">
-          <img src="assets/img/mobile/library.jpg" alt="Мобильная библиотека" loading="lazy">
-          <div class="phone-cap"><span data-lang-ru>Библиотека</span><span data-lang-en>Library</span></div>
+        <div class="phone" style="--i:1" data-full="assets/img/mobile/search.jpg">
+          <div class="phone-card"><img src="assets/img/mobile/search.jpg" alt="Мобильный поиск" loading="lazy"></div>
         </div>
-        <div class="phone">
-          <img src="assets/img/mobile/profile.jpg" alt="Мобильный профиль" loading="lazy">
-          <div class="phone-cap"><span data-lang-ru>Профиль</span><span data-lang-en>Profile</span></div>
+        <div class="phone" style="--i:2" data-full="assets/img/mobile/library.jpg">
+          <div class="phone-card"><img src="assets/img/mobile/library.jpg" alt="Мобильная библиотека" loading="lazy"></div>
         </div>
-        <div class="phone">
-          <img src="assets/img/mobile/settings.jpg" alt="Мобильные настройки" loading="lazy">
-          <div class="phone-cap"><span data-lang-ru>Оформление</span><span data-lang-en>Appearance</span></div>
+        <div class="phone" style="--i:3" data-full="assets/img/mobile/wave.jpg">
+          <div class="phone-card"><img src="assets/img/mobile/wave.jpg" alt="Моя волна на телефоне" loading="lazy"></div>
+        </div>
+        <div class="phone" style="--i:4" data-full="assets/img/mobile/comments.jpg">
+          <div class="phone-card"><img src="assets/img/mobile/comments.jpg" alt="Комментарии на телефоне" loading="lazy"></div>
+        </div>
+        <div class="phone" style="--i:5" data-full="assets/img/mobile/fullscreen.jpg">
+          <div class="phone-card"><img src="assets/img/mobile/fullscreen.jpg" alt="Полноэкранный плеер на телефоне" loading="lazy"></div>
+        </div>
+        <div class="phone" style="--i:6" data-full="assets/img/mobile/profile.jpg">
+          <div class="phone-card"><img src="assets/img/mobile/profile.jpg" alt="Мобильный профиль" loading="lazy"></div>
         </div>
       </div>
+      <p class="phones-hint"><span data-lang-ru>Нажмите на экран, чтобы увеличить</span><span data-lang-en>Click a screen to enlarge</span></p>
     </div>
   </section>
 
@@ -347,7 +370,7 @@
       <div class="section-head center reveal">
         <span class="eyebrow" data-lang-ru>Загрузки</span><span class="eyebrow" data-lang-en>Download</span>
         <h2><span data-lang-ru>Скачать Latency</span><span data-lang-en>Get Latency</span></h2>
-        <p><span data-lang-ru>Готовые сборки публикуются на GitHub Releases. Текущая версия — <b>0.2.0</b>.</span><span data-lang-en>Prebuilt binaries are published on GitHub Releases. Current version — <b>0.2.0</b>.</span></p>
+        <p><span data-lang-ru>Готовые сборки публикуются на GitHub Releases. Текущая версия — <b>1.0.0</b>.</span><span data-lang-en>Prebuilt binaries are published on GitHub Releases. Current version — <b>1.0.0</b>.</span></p>
       </div>
 
       <div class="dl-grid reveal">
@@ -359,8 +382,8 @@
           <div class="plat-sub" data-lang-ru>Эталонный опыт · x64</div>
           <div class="plat-sub" data-lang-en style="display:none;">Reference experience · x64</div>
           <ul>
-            <li><code>Latency-0.2.0-x64.exe</code> — <span data-lang-ru>установщик (NSIS)</span><span data-lang-en>installer (NSIS)</span></li>
-            <li><code>Latency-0.2.0-portable.exe</code> — <span data-lang-ru>портативная версия</span><span data-lang-en>portable build</span></li>
+            <li><code>Latency-1.0.0-x64.exe</code> — <span data-lang-ru>установщик (NSIS)</span><span data-lang-en>installer (NSIS)</span></li>
+            <li><code>Latency-1.0.0-portable.exe</code> — <span data-lang-ru>портативная версия</span><span data-lang-en>portable build</span></li>
           </ul>
           <a class="btn btn-primary btn-block" href="https://github.com/nxrtwee/latency-player/releases/latest" target="_blank" rel="noopener">
             <span data-lang-ru>Скачать для Windows</span><span data-lang-en>Download for Windows</span>
