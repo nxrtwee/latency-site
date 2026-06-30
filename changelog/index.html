@@ -76,11 +76,76 @@
 
     <div class="timeline">
 
+      <!-- 1.1.0 -->
+      <section class="release reveal">
+        <div class="release-head">
+          <h3 class="gradient-text">1.1.0</h3>
+          <span class="release-ver" data-lang-ru>Текущая</span><span class="release-ver" data-lang-en style="display:none;">Latest</span>
+          <span class="release-date">2026-06-30</span>
+        </div>
+        <p style="margin-bottom:14px;"><span data-lang-ru>Звук как надо и бесшовное проигрывание: выравнивание громкости, кроссфейд, радио по треку и артисту, кастомный фон вкладок и живая анимация смены трека.</span><span data-lang-en>Sound done right and seamless playback: volume leveling, crossfade, track &amp; artist radio, custom tab backgrounds and a live track-change animation.</span></p>
+
+        <div class="release-group">
+          <h4>🔊 <span data-lang-ru>Звук</span><span data-lang-en>Sound</span></h4>
+          <ul>
+            <li><span data-lang-ru><strong>Выравнивание громкости</strong> — треки приводятся к единой громкости по метаданным (R128/LUFS у Яндекса, ReplayGain у локальных файлов), с защитой от клиппинга по пику. На десктопе и для локальных файлов на телефоне.</span><span data-lang-en><strong>Volume leveling</strong> — tracks are matched to an even loudness from metadata (Yandex R128/LUFS, local ReplayGain tags), true-peak limited. Desktop and local files on mobile.</span></li>
+            <li><span data-lang-ru><strong>Кроссфейд</strong> — плавные переходы между треками, 0–12 секунд (Настройки → Звук). На всех платформах.</span><span data-lang-en><strong>Crossfade</strong> — smooth track-to-track transitions, 0–12 seconds (Settings → Sound). All platforms.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>📻 <span data-lang-ru>Радио по треку и артисту</span><span data-lang-en>Track &amp; artist radio</span></h4>
+          <ul>
+            <li><span data-lang-ru>«Моя волна по треку» и «по артисту» для Яндекс Музыки — бесконечная станция от выбранного трека или исполнителя (меню «…» у трека, кнопка на странице артиста).</span><span data-lang-en>“My Wave” seeded from a track or artist for Yandex Music — an endless station (track “…” menu, button on the artist page).</span></li>
+            <li><span data-lang-ru>SoundCloud: «Станция от трека» — автопилот, заведённый от выбранного трека.</span><span data-lang-en>SoundCloud: “Station from track” — an autopilot seeded from the chosen track.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>🎨 <span data-lang-ru>Оформление</span><span data-lang-en>Appearance</span></h4>
+          <ul>
+            <li><span data-lang-ru><strong>Кастомный фон вкладок</strong> — своя картинка в шапке «Любимого», «Недавнего», «Скачанного», локальной библиотеки и плейлистов.</span><span data-lang-en><strong>Custom tab backgrounds</strong> — your own image in the header of Liked, Recent, Downloaded, the local library and playlists.</span></li>
+            <li><span data-lang-ru><strong>Анимация смены трека</strong> в плеер-баре и правой панели (простая на oldgen, выразительная на nextgen; пружинная на мобайле).</span><span data-lang-en><strong>Track-change animation</strong> in the player bar and right panel (simple on oldgen, expressive on nextgen; springy on mobile).</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>🐛 <span data-lang-ru>Исправления</span><span data-lang-en>Fixes</span></h4>
+          <ul>
+            <li><span data-lang-ru>Меню «…» у трека на скине nextgen больше не просвечивает.</span><span data-lang-en>The track “…” menu is no longer translucent on the nextgen skin.</span></li>
+            <li><span data-lang-ru>Секция «Ваши миксы» скрыта по умолчанию для пользователей без входа в SoundCloud.</span><span data-lang-en>The “Your Mixes” section is hidden by default for users not signed into SoundCloud.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 1.0.1 -->
+      <section class="release reveal">
+        <div class="release-head">
+          <h3>1.0.1</h3>
+          <span class="release-date">2026-06-29</span>
+        </div>
+        <p style="margin-bottom:14px;"><span data-lang-ru><strong>Latency теперь и на Linux.</strong> Первая официальная сборка под Linux — AppImage (универсальный) и rpm (Fedora/RHEL).</span><span data-lang-en><strong>Latency is now on Linux.</strong> The first official Linux build — AppImage (universal) and rpm (Fedora/RHEL).</span></p>
+
+        <div class="release-group">
+          <h4>🐧 <span data-lang-ru>Linux — дебют</span><span data-lang-en>Linux — debut</span></h4>
+          <ul>
+            <li><span data-lang-ru>AppImage запускается на любом дистрибутиве (<code>chmod +x</code> и открыть) и rpm-пакет для Fedora/RHEL.</span><span data-lang-en>The AppImage runs on any distro (<code>chmod +x</code> &amp; open) plus an rpm package for Fedora/RHEL.</span></li>
+            <li><span data-lang-ru>Иконка приложения корректно показывается в доке, Alt-Tab и меню приложений.</span><span data-lang-en>The app icon shows correctly in the dock, Alt-Tab and the app menu.</span></li>
+          </ul>
+        </div>
+
+        <div class="release-group">
+          <h4>🖥️ <span data-lang-ru>ПК — исправления</span><span data-lang-en>Desktop — fixes</span></h4>
+          <ul>
+            <li><span data-lang-ru>Текст в профилях артистов больше не обрезается снизу (буквы y, q, p, g).</span><span data-lang-en>Text on artist pages is no longer clipped at the bottom (y, q, p, g).</span></li>
+          </ul>
+        </div>
+      </section>
+
       <!-- 1.0.0 -->
       <section class="release reveal">
         <div class="release-head">
-          <h3 class="gradient-text">1.0.0</h3>
-          <span class="release-ver" data-lang-ru>Текущая</span><span class="release-ver" data-lang-en style="display:none;">Latest</span>
+          <h3>1.0.0</h3>
           <span class="release-date">2026-06-28</span>
         </div>
         <p style="margin-bottom:14px;"><span data-lang-ru>Стабильный релиз. Единая версия для всех платформ — Windows, Android и iOS выходят одним номером.</span><span data-lang-en>The stable release. A single version across all platforms — Windows, Android and iOS now ship under one number.</span></p>
