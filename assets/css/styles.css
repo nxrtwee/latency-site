@@ -777,7 +777,8 @@ p { color: var(--text-dim); }
 /* ---------- Downloads ---------- */
 .dl-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  /* 2×2: four platforms in two tidy rows (wider cards = filenames never overflow) */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 .dl-card {
@@ -797,8 +798,10 @@ p { color: var(--text-dim); }
 .dl-card h3 { font-size: 1.3rem; margin-bottom: 4px; }
 .dl-card .plat-sub { font-size: .85rem; color: var(--text-faint); margin-bottom: 18px; }
 .dl-card ul { list-style: none; padding: 0; margin: 0 0 22px; font-size: .9rem; color: var(--text-dim); display: grid; gap: 9px; }
-.dl-card li { display: flex; gap: 9px; align-items: flex-start; }
+.dl-card li { display: flex; gap: 9px; align-items: flex-start; flex-wrap: wrap; min-width: 0; }
 .dl-card li::before { content: "›"; color: var(--cyan); font-weight: 700; }
+/* long file names (Latency-1.1.0-x86_64.AppImage) must break, never overflow */
+.dl-card code { overflow-wrap: anywhere; }
 .dl-card .btn { margin-top: auto; }
 .dl-badge {
   position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
